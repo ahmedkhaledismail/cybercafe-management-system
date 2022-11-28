@@ -3,20 +3,28 @@ class session:
     _computer_id = None
     _user_id = None
     _start = None
-    _end = None
+    _end = 0
     _fees = None
 
-    def _calculate_fees():
-        pass
+    def _calculate_fees(Drinks):
+        _fees=Start *3.5 + Drinks*15 # <--Need to have Data base to decide if we want to have diffrent Drinks
+        return Total
 
-    def calculate_session_time():
-        pass
+    #def calculate_session_time(): <--  No Need 
+       # pass
 
     def login():
-        pass
+         _user_id =input(print("Please Enter The User ID"))
+        for i in Users: #Check the Users in Data base 
+            if i ==  _user_id:
+             while(_end!=1):
+                 _start+=0.01
+            else:
+                print("The User_ID not found ")
 
     def logout():
-        pass
+        
+        _end=1
 
     def guest_login():
         pass
