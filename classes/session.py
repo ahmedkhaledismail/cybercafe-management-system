@@ -18,5 +18,5 @@ class session:
     def logout():
         pass
 
-    def gues_login():
+    def guest_login():
         pass
