@@ -22,11 +22,11 @@ class session:
             else:
                 print("The User_ID not found ")
 
-    def logout():
+    def logout(_session_id):
         
         _end=1
         df = pd.read_csv('Desktop\OOP Project\Book1.csv',index_col="Session_ID")
-        df = df.drop(2,axis='rows')
+        df = df.drop(_session_id,axis='rows')
         df.to_csv('Desktop\OOP Project\Book1.csv')
         print("Session has been ended")
         print(df)
