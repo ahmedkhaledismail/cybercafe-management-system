@@ -17,7 +17,7 @@ class computer:
         df2 = df = pd.DataFrame({"cpu":__cpu,
                                  'ram':__ram,
                                  'gpu':__gpu,
-                                  'storage':__storage}
+                                 'storage':__storage}
                                  ,index=[1])
 
         df1 = df1.append(df2, ignore_index=True)
@@ -28,7 +28,6 @@ class computer:
 
 
         
-
     def Show_All_Computers():
        return (pd.read_csv('databases\Computer_Tbl.CSV', index_col=[0]))
 
