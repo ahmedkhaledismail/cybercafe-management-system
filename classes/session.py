@@ -25,6 +25,12 @@ class session:
     def logout():
         
         _end=1
+        df = pd.read_csv('Desktop\OOP Project\Book1.csv',index_col="Session_ID")
+        df = df.drop(2,axis='rows')
+        df.to_csv('Desktop\OOP Project\Book1.csv')
+        print("Session has been ended")
+        print(df)
+
 
     def guest_login():
         pass
