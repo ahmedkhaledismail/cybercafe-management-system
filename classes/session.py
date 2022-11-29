@@ -21,6 +21,7 @@ class session:
         if check>=1:
             new_row = {'Session_ID': '4', 'User_ID':_user_id	,'Computer_ID':'4'	,'Start':'0'	,'End':'0'	,'Drinks':'0'}
             dft=dft.append( new_row , ignore_index=True )
+            dft.to_csv('Desktop\OOP Project\Book1.csv')
             while(_end !=1):
                 _start+=0.01
         else:
