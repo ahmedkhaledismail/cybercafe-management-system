@@ -4,14 +4,12 @@ sys.path.insert(
     1,
     "/Users/ahmedkhaled/Desktop/Ahmed Khalid/MSA University/Computer Engineering/Third Year/First Semester/Concepts of Programming Languages/project/CybercafeManagementSystem",
 )
-from user import user
-from member import member
 
-from databases import queries as queries
+from classes.user import user
+from classes.member import member
+
 from project import constants as CONSTANTS
-from project import helpers as HELPERS
-from project import validators as validators
-from databases import queries as queries
+from databases import queries as QUERIES
 
 
 class admin(user):
@@ -19,7 +17,7 @@ class admin(user):
         super().__init__(**kwargs)
 
     def show_member(self, member_user_name):
-        member_attributes, response = queries.lookup_item(
+        member_attributes, response = QUERIES.lookup_item(
             CONSTANTS.USERS_DATABASE, member_user_name
         )
         if response == CONSTANTS.ITEM_EXIST:
@@ -32,31 +30,24 @@ class admin(user):
                 )
             )
 
-    def add_new_member(self, member_attributes):
+    def add_new_member(self, **member_attributes):
         role = member_attributes.get("role")
         user_name = member_attributes.get("user_name")
-        response = queries.lookup_item(CONSTANTS.USERS_DATABASE, user_name)[1]
-        while response == CONSTANTS.KEY_EXIST:
-            suggested_user_name = HELPERS.suggest_user_name(user_name)
-            print(
-                "ERROR admin.add_new_member(): user name '{}' is already registered, you can use '{}' as a user name".format(
-                    user_name, suggested_user_name
-                )
-            )
-            user_name = validators.get_user_name("Enter user name: ")
-
-        if role == "admin":
-            member_object = admin(**member_attributes)
-        elif role == "member":
-            member_object = member(**member_attributes)
-
-        return member_object
+        response = QUERIES.lookup_item(CONSTANTS.USERS_DATABASE, user_name)[1]
+        if response == CONSTANTS.ITEM_DOES_NOT_EXIST:
+            if role == "admin":
+                member_object = admin(**member_attributes)
+            elif role == "member":
+                member_object = member(**member_attributes)
+            return member_object
+        elif response == CONSTANTS.ITEM_EXIST:
+            print("ERROR: user name '{}' is already registered".format(user_name))
 
     def update_record(self, user_name, key, value):
-        queries.update_attribute(CONSTANTS.USERS_DATABASE, user_name, key, value)
+        QUERIES.update_attribute(CONSTANTS.USERS_DATABASE, user_name, key, value)
 
     def search_record(self):
         pass
 
     def delete_record(self, user_name):
-        queries.delete_item(CONSTANTS.USERS_DATABASE, user_name)
+        QUERIES.delete_item(CONSTANTS.USERS_DATABASE, user_name)
