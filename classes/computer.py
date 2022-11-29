@@ -24,6 +24,7 @@ class computer:
 
         df = pd.concat([df1,df2],ignore_index=False)
         df.to_csv('databases\Computer_Tbl.CSV')
+        print('Computer was Added successfully!')
         
 
 
@@ -31,8 +32,17 @@ class computer:
     def Show_All_Computers():
        return (pd.read_csv('databases\Computer_Tbl.CSV', index_col=[0]))
 
-    def _Update_Record():
-        pass
+    def Update_Record(x):
+        df = pd.read_csv('databases\Computer_Tbl.CSV', index_col=[0])
+
+        __cpu = input('Please enter the CPU model: ')
+        __ram = input('Please enter the ram siza: ')
+        __gpu = input('Please enter the gpu model: ')
+        __storage = input('Please enter the storage size: ')
+
+        df.at[x,["ram","gpu","storage","cpu"]] =[__ram,__gpu,__storage,__cpu]
+        df.to_csv('databases\Computer_Tbl.CSV')
+        print('Computer was updated successfully!')
 
     def Delete_Computer_by_index(x):
         df = pd.read_csv('databases\Computer_Tbl.CSV', index_col=[0])
@@ -40,5 +50,6 @@ class computer:
         df.to_csv('databases\Computer_Tbl.CSV')
         print('Computer was deleted successfully!')
 
-    def _Search_Record():
-        pass
+    def Search_Record(Key_word):
+        df = pd.read_csv('databases\Computer_Tbl.CSV', index_col=[0])        
+        return(df[df.apply(lambda row: row.astype(str).str.contains(Key_word).any(), axis=1)])
