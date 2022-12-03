@@ -5,49 +5,18 @@ sys.path.insert(
     "/Users/ahmedkhaled/Desktop/Ahmed Khalid/MSA University/Computer Engineering/Third Year/First Semester/Concepts of Programming Languages/project/CybercafeManagementSystem",
 )
 from project import constants as CONSTANTS
-import databases.queries as queries
+from databases import queries as QUERIES
 
 
-def get_user_name(fullname):
-    """
-    converts the full name into a user name
-
-    Parameters:
-        fullname (str): user full name seprated by white spaces
-
-    Returns:
-        full name after converting whitespaces to underscores and capital letters to lowercase letters
-    """
-    user_name = ""
-    for char in fullname:
-        if char.isspace():
-            user_name = user_name + "_"
-        elif char.isalpha():
-            user_name = user_name + char.lower()
-
-    return user_name
-
-
-def create_user_name(user_name):
-    """
-    create a unique name from given user name such that new user name does not exist in the database
-
-    Parameters:
-        user_name (str): user name after applying user name standards
-
-    Returns:
-        unique user name that does not exist as a key in the database
-    """
-    counter = 0
+def suggest_user_name(user_name):
+    counter = 1
     while True:
-        user_name = user_name + str(counter)
-        response = queries.search_database_by_key(
-            CONSTANTS.DATABASES["USERS_DATABASE"], user_name
-        )
-        if response == CONSTANTS.KEY_DOES_NOT_EXIST:
-            break
-        if response == CONSTANTS.KEY_EXIST:
+        response = QUERIES.lookup_item(CONSTANTS.USERS_DATABASE, user_name)[1]
+        if response == CONSTANTS.ITEM_EXIST:
+            user_name = user_name + str(counter)
             counter += 1
             continue
+        elif response == CONSTANTS.ITEM_DOES_NOT_EXIST:
+            break
 
     return user_name

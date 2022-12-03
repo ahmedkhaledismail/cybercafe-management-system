@@ -5,28 +5,32 @@ sys.path.insert(
     "/Users/ahmedkhaled/Desktop/Ahmed Khalid/MSA University/Computer Engineering/Third Year/First Semester/Concepts of Programming Languages/project/CybercafeManagementSystem",
 )
 from project import constants as CONSTANTS
+from project import validators as validators
+from databases import queries as queries
 
 
 class user:
     def __init__(self, **kwargs):
-        self.__first = kwargs.get("first")
-        self.__last = kwargs.get("last")
+        self.__first_name = kwargs.get("first_name")
+        self.__last_name = kwargs.get("last_name")
         self.__phone_number = kwargs.get("phone_number")
         self.__address = kwargs.get("address")
         self.__age = kwargs.get("age")
         self.__role = kwargs.get("role")
         self.__password = kwargs.get("password")
+        self.__user_name = kwargs.get("user_name")
         self.__user_id = self.__create_user_id()
+        queries.save_item(CONSTANTS.USERS_DATABASE, kwargs)
 
     @property
     def fullname(self):
-        return "{} {}".format(self.__first, self.__last)
+        return "{} {}".format(self.__first_name, self.__last_name)
 
     @fullname.setter
     def fullname(self, fullname):
-        first, last = fullname.split(" ")
-        self.__first = first
-        self.__last = last
+        first_name, last_name = fullname.split(" ")
+        self.__first_name = first_name
+        self.__last_name = last_name
 
     @property
     def phone_number(self):
@@ -35,6 +39,12 @@ class user:
     @phone_number.setter
     def phone_number(self, phone_number):
         self.__phone_number = phone_number
+        queries.update_attribute(
+            CONSTANTS.USERS_DATABASE,
+            self.__user_name,
+            "phone_number",
+            phone_number,
+        )
 
     @property
     def address(self):
@@ -43,6 +53,12 @@ class user:
     @address.setter
     def address(self, address):
         self.__address = address
+        queries.update_attribute(
+            CONSTANTS.USERS_DATABASE,
+            self.__user_name,
+            "address",
+            address,
+        )
 
     @property
     def age(self):
@@ -51,6 +67,12 @@ class user:
     @age.setter
     def age(self, age):
         self.__age = age
+        queries.update_attribute(
+            CONSTANTS.USERS_DATABASE,
+            self.__user_name,
+            "age",
+            age,
+        )
 
     @property
     def role(self):
@@ -59,6 +81,12 @@ class user:
     @role.setter
     def role(self, role):
         self.__role = role
+        queries.update_attribute(
+            CONSTANTS.USERS_DATABASE,
+            self.__user_name,
+            "role",
+            role,
+        )
 
     @property
     def password(self):
@@ -67,6 +95,12 @@ class user:
     @password.setter
     def password(self, password):
         self.__password = password
+        queries.update_attribute(
+            CONSTANTS.USERS_DATABASE,
+            self.__user_name,
+            "password",
+            password,
+        )
 
     @property
     def user_id(self):
@@ -75,6 +109,12 @@ class user:
     @user_id.setter
     def user_id(self, user_id):
         self.__user_id = user_id
+        queries.update_attribute(
+            CONSTANTS.USERS_DATABASE,
+            self.__user_name,
+            "user_id",
+            user_id,
+        )
 
     def __create_user_id(self):
         CONSTANTS.USER_ID += 1
