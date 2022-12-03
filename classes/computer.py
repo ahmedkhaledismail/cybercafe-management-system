@@ -14,15 +14,13 @@ class computer:
 
         df1 = pd.read_csv('databases\Computer_Tbl.CSV', index_col=[0])
 
-        df2 = df = pd.DataFrame({"cpu":__cpu,
+        df2 = pd.DataFrame({"cpu":__cpu,
                                  'ram':__ram,
                                  'gpu':__gpu,
                                  'storage':__storage}
                                  ,index=[1])
 
-        df1 = df1.append(df2, ignore_index=True)
-
-        df = pd.concat([df1,df2],ignore_index=False)
+        df = pd.concat([df1,df2],ignore_index=True)
         df.to_csv('databases\Computer_Tbl.CSV')
         print('Computer was Added successfully!')
         
