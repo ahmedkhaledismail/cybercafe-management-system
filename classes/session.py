@@ -1,9 +1,9 @@
 import pandas as pd
 from datetime import datetime
 
-bookpath = "./databases/OOP Project/Book1.csv"
-userpath = "./databases/OOP Project/Users.csv"
-computerpath="databases\Computer_Tbl.CSV"
+bookpath = './databases/Book1.csv'
+userpath = './databases/Users.csv'
+computerpath = './databases/Computer_Tbl.csv'
 
 
 class session:
@@ -16,9 +16,9 @@ class session:
         self.fees = None
 
         self.calculate_session_time()
-        self.login()
-        self.logout()
-        self.guest_login()
+        self.start_session()
+        self.end_session()
+        # self.guest_login()
         self._calculate_fees()
 
     def calculate_session_time(self):
@@ -48,30 +48,19 @@ class session:
         else:
             print("The User ID is WRONG !!")
 
-    def end_session(self, session_id):
+    def end_session(self, session_id,computer_id):
 
         self.end = datetime.now().strftime("%H:%M:%S")
         dfs = pd.read_csv(bookpath, index_col="Session_ID")
-        dfc=pd.raed_csv(computerpath)
-        df.at[computer_id,["available"]] =[0]
+        dfc=pd.read_csv(computerpath,index_col="computer_id")
+        dfc.at[computer_id,"avalibale"] = 0
+        dfc.to_csv(computerpath)
         self.new_row["End"] = self.end
-        dfs = df.drop(session_id, axis="rows")
+        dfs = dfs.drop(session_id, axis="rows")
         dfs.to_csv(bookpath)
         print("Session has been ended")
         print(dfs)
 
-    def guest_start_session(self):
-        dft = pd.read_csv(bookpath)
-        self.new_row = {
-            "Session_ID": "5",
-            "User_ID": "Guest",
-            "Computer_ID": "5",
-            "Start": "0",
-            "End": "0",
-            "Drinks": "0",
-        }
-        dft = dft.append(self.new_row, ignore_index=True)
-        self.start = datetime.now().strftime("%H:%M:%S")
 
     def _calculate_fees(self, Drinks):
         _fees = self.calculate_session_time() * 3.5 + Drinks * 15
