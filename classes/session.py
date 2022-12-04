@@ -3,6 +3,7 @@ from datetime import datetime
 
 bookpath = "./databases/OOP Project/Book1.csv"
 userpath = "./databases/OOP Project/Users.csv"
+computerpath="databases\Computer_Tbl.CSV"
 
 
 class session:
@@ -50,12 +51,14 @@ class session:
     def end_session(self, session_id):
 
         self.end = datetime.now().strftime("%H:%M:%S")
-        df = pd.read_csv(bookpath, index_col="Session_ID")
+        dfs = pd.read_csv(bookpath, index_col="Session_ID")
+        dfc=pd.raed_csv(computerpath)
+        df.at[computer_id,["available"]] =[0]
         self.new_row["End"] = self.end
-        df = df.drop(session_id, axis="rows")
-        df.to_csv(bookpath)
+        dfs = df.drop(session_id, axis="rows")
+        dfs.to_csv(bookpath)
         print("Session has been ended")
-        print(df)
+        print(dfs)
 
     def guest_start_session(self):
         dft = pd.read_csv(bookpath)
