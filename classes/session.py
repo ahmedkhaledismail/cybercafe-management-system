@@ -24,7 +24,7 @@ class session:
         sec = (self.end - self.start).total_seconds()
         return sec
 
-    def login(self):
+    def start_session(self):
         dfu = pd.read_csv(userpath)
         dft = pd.read_csv(bookpath)
         _user_id = input(print("Please Enter The User ID"))
@@ -47,7 +47,7 @@ class session:
         else:
             print("The User ID is WRONG !!")
 
-    def logout(self, session_id):
+    def end_session(self, session_id):
 
         self.end = datetime.now().strftime("%H:%M:%S")
         df = pd.read_csv(bookpath, index_col="Session_ID")
@@ -57,7 +57,7 @@ class session:
         print("Session has been ended")
         print(df)
 
-    def guest_login(self):
+    def guest_start_session(self):
         dft = pd.read_csv(bookpath)
         self.new_row = {
             "Session_ID": "5",
