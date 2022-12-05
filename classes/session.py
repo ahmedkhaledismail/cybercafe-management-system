@@ -26,8 +26,8 @@ class session:
         dfc=pd.read_csv(computerpath)
 
         for x in range(len(dfc)):
-                if dfc.at[x,'avalibale'] == 0:
-                        dfc.at[x,'avalibale'] = 1
+                if dfc.at[x,'available'] == 0:
+                        dfc.at[x,'available'] = 1
                         dfc.to_csv(computerpath,index=False)
                         self.computer_id = x
                         self.session_id=len(dfs)
@@ -51,7 +51,7 @@ class session:
         self.end = datetime.now().strftime("%H:%M:%S")
         dfs = pd.read_csv(bookpath)
         dfc=pd.read_csv(computerpath)
-        dfc.at[self.computer_id,"avalibale"] = 0
+        dfc.at[self.computer_id,'available'] = 0
         dfc.to_csv(computerpath,index=False)
         dfs.at[self.session_id,'End'] = self.end
         dfs.to_csv(bookpath,index=False)
