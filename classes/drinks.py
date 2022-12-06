@@ -1,12 +1,10 @@
 import pandas as pd
 class drinks:
     
-    def __init__(self):
-        self.__drink_name = None
-        self.__drink_Price = None
-        self.__Drink_id = None
+   
+    __Drink_id = None
 
-    def add_drink(self,drink_name,drink_Price):
+    def __init__(self,drink_name,drink_Price):
         self.__drink_name = drink_name
         self.__drink_Price = drink_Price
 

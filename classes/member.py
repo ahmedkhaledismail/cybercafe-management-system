@@ -6,11 +6,4 @@ class member(user):
     __start = None
     __end = None
 
-    def change_password():
-        pass
-
-    def login():
-        pass
-
-    def logout():
-        pass
+    

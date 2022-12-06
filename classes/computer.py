@@ -1,19 +1,12 @@
 import pandas as pd
 class computer:
-    
-    def __init__(self):     
-        self.__cpu = None
-        self.__ram = None
-        self.__gpu = None
-        self.__storage = None
-        self.__computer_id = None
-        self.__available = 0
 
-    def Add_New_Computer(self,cpu,ram,gpu,storage):
+    def __init__(self,cpu,ram,gpu,storage,available = 0):
         self.__cpu = cpu
         self.__ram = ram
         self.__gpu = gpu
         self.__storage = storage
+        self.__available = available
 
         df1 = pd.read_csv('databases\Computer_Tbl.CSV', index_col=[0])
 
