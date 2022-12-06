@@ -1,19 +1,28 @@
 import pandas as pd
 class computer:
+    
+    def __init__(self):     
+        self.__cpu = None
+        self.__ram = None
+        self.__gpu = None
+        self.__storage = None
+        self.__computer_id = None
+       
 
-    def __init__(self,cpu,ram,gpu,storage,available = 0):
+    def Add_New_Computer(self,cpu,ram,gpu,storage):
         self.__cpu = cpu
         self.__ram = ram
         self.__gpu = gpu
         self.__storage = storage
-        self.__available = available
+        self.__available = 0
 
         df1 = pd.read_csv('databases\Computer_Tbl.CSV', index_col=[0])
 
         df2 = pd.DataFrame({"cpu":self.__cpu,
                                  'ram':self.__ram,
                                  'gpu':self.__gpu,
-                                 'storage':self.__storage}
+                                 'storage':self.__storage,
+                                 'available':self.__available}
                                  ,index=[1])
 
         df = pd.concat([df1,df2],ignore_index=True)
