@@ -6,9 +6,7 @@ sys.path.insert(
     "/Users/ahmedkhaled/Desktop/Ahmed Khalid/MSA University/Computer Engineering/Third Year/First Semester/Concepts of Programming Languages/project/CybercafeManagementSystem",
 )
 
-
-from project import validators as validators
-from project import constants as constants
+from project import constants as CONSTANTS
 
 
 def lookup_item(database, item):
@@ -17,13 +15,13 @@ def lookup_item(database, item):
         for entry in dict_database:
             for item_name in entry:
                 if item_name == item:
-                    return entry[item_name], constants.ITEM_EXIST
-    return None, constants.ITEM_DOES_NOT_EXIST
+                    return entry[item_name], CONSTANTS.ITEM_EXIST
+    return None, CONSTANTS.ITEM_DOES_NOT_EXIST
 
 
 def get_attribute(database, item, key):
     item_attributes, response = lookup_item(database, item)
-    if response == constants.ITEM_EXIST:
+    if response == CONSTANTS.ITEM_EXIST:
         return item_attributes[key]
 
 
@@ -76,7 +74,7 @@ def save_item(database, item_attributes):
         json_database = json.load(f)
     item_name = get_item_name(item_attributes)
     response = lookup_item(database, item_name)[1]
-    if response == constants.ITEM_EXIST:
+    if response == CONSTANTS.ITEM_EXIST:
         print(
             "ERROR save_item(): the item {} already exists in the {} database".format(
                 item_name, database
