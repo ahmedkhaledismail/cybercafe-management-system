@@ -37,9 +37,9 @@ def get_password(placeholder):
                 capital_letters_count += 1
         if len(password) < 8:
             print("password must have at least 8 letters")
-        if numbers_count == 0:
+        elif numbers_count == 0:
             print("password must have at least 1 number")
-        if capital_letters_count == 0:
+        elif capital_letters_count == 0:
             print("password must have at least 1 capital letter")
         else:
             return password
