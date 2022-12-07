@@ -5,8 +5,7 @@ sys.path.insert(
     "/Users/ahmedkhaled/Desktop/Ahmed Khalid/MSA University/Computer Engineering/Third Year/First Semester/Concepts of Programming Languages/project/CybercafeManagementSystem",
 )
 from project import constants as CONSTANTS
-from project import validators as validators
-from databases import queries as queries
+from databases import queries as QUERIES
 
 
 class user:
@@ -20,7 +19,9 @@ class user:
         self.__password = kwargs.get("password")
         self.__user_name = kwargs.get("user_name")
         self.__user_id = self.__create_user_id()
-        queries.save_item(CONSTANTS.USERS_DATABASE, kwargs)
+        res = QUERIES.lookup_item(CONSTANTS.USERS_DATABASE, self.__user_name)[1]
+        if res == CONSTANTS.ITEM_DOES_NOT_EXIST:
+            QUERIES.save_item(CONSTANTS.USERS_DATABASE, kwargs)
 
     @property
     def fullname(self):
@@ -39,7 +40,7 @@ class user:
     @phone_number.setter
     def phone_number(self, phone_number):
         self.__phone_number = phone_number
-        queries.update_attribute(
+        QUERIES.update_attribute(
             CONSTANTS.USERS_DATABASE,
             self.__user_name,
             "phone_number",
@@ -53,7 +54,7 @@ class user:
     @address.setter
     def address(self, address):
         self.__address = address
-        queries.update_attribute(
+        QUERIES.update_attribute(
             CONSTANTS.USERS_DATABASE,
             self.__user_name,
             "address",
@@ -67,7 +68,7 @@ class user:
     @age.setter
     def age(self, age):
         self.__age = age
-        queries.update_attribute(
+        QUERIES.update_attribute(
             CONSTANTS.USERS_DATABASE,
             self.__user_name,
             "age",
@@ -81,7 +82,7 @@ class user:
     @role.setter
     def role(self, role):
         self.__role = role
-        queries.update_attribute(
+        QUERIES.update_attribute(
             CONSTANTS.USERS_DATABASE,
             self.__user_name,
             "role",
@@ -95,7 +96,7 @@ class user:
     @password.setter
     def password(self, password):
         self.__password = password
-        queries.update_attribute(
+        QUERIES.update_attribute(
             CONSTANTS.USERS_DATABASE,
             self.__user_name,
             "password",
@@ -109,7 +110,7 @@ class user:
     @user_id.setter
     def user_id(self, user_id):
         self.__user_id = user_id
-        queries.update_attribute(
+        QUERIES.update_attribute(
             CONSTANTS.USERS_DATABASE,
             self.__user_name,
             "user_id",
