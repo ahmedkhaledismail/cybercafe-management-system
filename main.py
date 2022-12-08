@@ -1,5 +1,6 @@
 import os
 import time
+from termcolor import colored
 
 from project import validators as VALIDATORS
 from project import constants as CONSTANTS
@@ -45,7 +46,7 @@ import classes.admin as ADMIN
 
 def main():
     print("\n\nWelcome to cybercafe management system\n\n")
-    print("1. admin login")
+    print("1. Admin login")
     print("2. Terminate Progrm")
     main_input = VALIDATORS.get_numeric("\n> ", 1, 2)
 
@@ -61,8 +62,11 @@ def main():
                 )
                 while response == CONSTANTS.ITEM_DOES_NOT_EXIST:
                     print(
-                        "\nERROR: user '{}' does not exist in '{}' database".format(
-                            user_name, CONSTANTS.USERS_DATABASE
+                        colored(
+                            "\nUSER DOES NOT EXIST EXCEPTION: user '{}' does not exist in '{}' database".format(
+                                user_name, CONSTANTS.USERS_DATABASE
+                            ),
+                            "red",
                         )
                     )
                     print("\nChoose an option to continue:")
@@ -84,7 +88,12 @@ def main():
                         CONSTANTS.USERS_DATABASE, user_name, "password"
                     )
                     if stored_password != password:
-                        print("ERROR: you have written a wrong password, try again!")
+                        print(
+                            colored(
+                                "\nINVALID PASSWORD EXCEPTION: you have written a wrong password, try again!",
+                                "red",
+                            )
+                        )
                         time.sleep(4)
                         continue
                     elif stored_password == password:
@@ -93,8 +102,11 @@ def main():
                             first_name = user_attributes.get("first_name")
                             last_name = user_attributes.get("last_name")
                             print(
-                                "SUCCESS: you have logged in to the system as {} {}".format(
-                                    first_name, last_name
+                                colored(
+                                    "\nSUCCESS: you have logged in to the system as {} {}".format(
+                                        first_name, last_name
+                                    ),
+                                    "green",
                                 )
                             )
                             time.sleep(5)
@@ -117,6 +129,13 @@ def main():
                                     master_entry_input = None
                                     # master entry options starts here
                                     while master_entry_input != 3:
+                                        os.system("clear")
+                                        print("1. member entry")
+                                        print("2. computer entry")
+                                        print("3. return")
+                                        master_entry_input = VALIDATORS.get_numeric(
+                                            "\n> ", 1, 3
+                                        )
                                         if master_entry_input == 1:
                                             member_entry_input = None
                                             while member_entry_input != 6:
@@ -148,6 +167,16 @@ def main():
                                         elif master_entry_input == 2:
                                             computer_entry_input = None
                                             while computer_entry_input != 6:
+                                                os.system("clear")
+                                                print("1. Add New Computer")
+                                                print("2. Show Computer")
+                                                print("3. Update Record")
+                                                print("4. Delete Record")
+                                                print("5. Search Record")
+                                                print("6. Return")
+                                                computer_entry_input = (
+                                                    VALIDATORS.get_numeric("\n> ", 1, 6)
+                                                )
                                                 if computer_entry_input == 1:
                                                     # 1. Add New Computer
                                                     pass
@@ -164,32 +193,22 @@ def main():
                                                     # 5. Search Record
                                                     pass
 
-                                                os.system("clear")
-                                                print("1. Add New Computer")
-                                                print("2. Show Computer")
-                                                print("3. Update Record")
-                                                print("4. Delete Record")
-                                                print("5. Search Record")
-                                                print("6. Return")
-                                                computer_entry_input = (
-                                                    VALIDATORS.get_numeric("\n> ", 1, 6)
-                                                )
-
                                         elif master_entry_input == 3:
+                                            # return option
                                             break
-
-                                        os.system("clear")
-                                        print("1. member entry")
-                                        print("2. computer entry")
-                                        print("3. return")
-                                        master_entry_input = VALIDATORS.get_numeric(
-                                            "\n> ", 1, 3
-                                        )
 
                                 elif admin_input == 2:
                                     cafe_management_entry_input = None
                                     # cafe management options starts here
                                     while cafe_management_entry_input != 4:
+                                        os.system("clear")
+                                        print("1. Bookings")
+                                        print("2. Charges")
+                                        print("3. Renewal")
+                                        print("4. Return")
+                                        cafe_management_entry_input = (
+                                            VALIDATORS.get_numeric("\n> ", 1, 4)
+                                        )
                                         if cafe_management_entry_input == 1:
                                             # bookings
                                             pass
@@ -200,14 +219,6 @@ def main():
                                             # renewal
                                             pass
 
-                                        os.system("clear")
-                                        print("1. Bookings")
-                                        print("2. Charges")
-                                        print("3. Renewal")
-                                        print("4. Return")
-                                        cafe_management_entry_input = (
-                                            VALIDATORS.get_numeric("\n> ", 1, 4)
-                                        )
                                 elif admin_input == 3:
                                     # logout admin
                                     break
@@ -224,7 +235,10 @@ def main():
 
                         elif role == "member":
                             print(
-                                "INVALID LOGIN: admin users are only allowed to login to the system"
+                                colored(
+                                    "\nINVALID LOGIN EXCEPTION: admin users are only allowed to login to the system",
+                                    "red",
+                                )
                             )
                             print("\nChoose an option to continue:")
                             print("1. try to login again")
@@ -240,10 +254,10 @@ def main():
                         break
 
                 else:
-                    # either user exist or does not exist in the users.json database
+                    # either user exist or does not exist in the users.json database. No more options here
                     break
         os.system("clear")
-        print("1. admin login")
+        print("1. Admin login")
         print("2. Terminate Progrm")
         main_input = VALIDATORS.get_numeric("\n> ", 1, 2)
 
