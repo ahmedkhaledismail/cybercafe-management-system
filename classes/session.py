@@ -26,27 +26,27 @@ class session:
         dfc=pd.read_csv(computerpath)
 
         for x in range(len(dfc)):
+                flagavailabe=0
                 if dfc.at[x,'available'] == 0:
+                        flagavailabe=1
                         dfc.at[x,'available'] = 1
                         dfc.to_csv(computerpath,index=False)
                         self.computer_id = x
                         self.session_id=len(dfs)
+                        new_row = {
+                        "Session_ID":self.session_id,
+                        "User_ID": self.user_id,
+                        "Computer_ID": self.computer_id,
+                        "Start": self.start,
+                        "End": self.end,
+                        "Drinks": "0",}                                    
+                        dfs = dfs.append(new_row , ignore_index=True)
+                        dfs.to_csv(bookpath,index=False)
                         break 
-                else:
-                    print("Sorry no available computer")
-                
+                    
+        if flagavailabe == 0:
+            print("Sorry no available computer")
             
-        new_row = {
-                "Session_ID":self.session_id,
-                "User_ID": self.user_id,
-                "Computer_ID": self.computer_id,
-                "Start": self.start,
-                "End": self.end,
-                "Drinks": "0",
-            }
-        
-        dfs = dfs.append(new_row , ignore_index=True)
-        dfs.to_csv(bookpath,index=False)
 
 
     def end_session(self):
