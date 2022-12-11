@@ -32,7 +32,10 @@ class session:
                         self.computer_id = x
                         self.session_id=len(dfs)
                         break 
-
+                else:
+                    print("Sorry no available computer")
+                
+            
         new_row = {
                 "Session_ID":self.session_id,
                 "User_ID": self.user_id,
