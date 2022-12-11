@@ -128,13 +128,14 @@ def main():
                                 if admin_input == 1:
                                     master_entry_input = None
                                     # master entry options starts here
-                                    while master_entry_input != 3:
+                                    while master_entry_input != 4:
                                         os.system("clear")
                                         print("1. member entry")
                                         print("2. computer entry")
-                                        print("3. return")
+                                        print("3. session entry")
+                                        print("4. return")
                                         master_entry_input = VALIDATORS.get_numeric(
-                                            "\n> ", 1, 3
+                                            "\n> ", 1, 4
                                         )
                                         if master_entry_input == 1:
                                             member_entry_input = None
@@ -193,7 +194,7 @@ def main():
                                                     # 5. Search Record
                                                     pass
 
-                                        elif master_entry_input == 3:
+                                        elif master_entry_input == 4:
                                             # return option
                                             break
 
