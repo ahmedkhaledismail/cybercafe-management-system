@@ -2,9 +2,9 @@ import pandas as pd
 from classes.drinks import drinks
 from datetime import datetime
 
-bookpath = './databases/Book1.csv'
-userpath = './databases/Users.csv'
-computerpath = './databases/Computer_Tbl.csv'
+bookpath = r'databases\Book1.csv'
+userpath = r'databases\Users.csv'
+computerpath = r'databases\Computer_Tbl.csv'
 
 
 class session:
@@ -17,8 +17,13 @@ class session:
         self.fees = None
 
 
-    def calculate_session_time(self):
-        sec = (self.end - self.start).total_seconds()
+    def calculate_session_time(self,session_id):
+        dfs = pd.read_csv(bookpath)
+        self.start = dfs.at[session_id,'Start']
+        t1 = datetime.strptime(self.start, "%H:%M:%S")
+        self.end = dfs.at[session_id,'End']
+        t2 = datetime.strptime(self.end, "%H:%M:%S")
+        sec = (t2 - t1 ).total_seconds()
         return sec
 
     def start_session(self):
@@ -41,7 +46,7 @@ class session:
                         "Start": self.start,
                         "End": self.end,
                         "Drinks": "",
-                        "Fees":""}                                    
+                        "Fees":self.fees}                                    
                         dfs = dfs.append(new_row , ignore_index=True)
                         dfs.to_csv(bookpath,index=False)
                         break 
@@ -54,20 +59,15 @@ class session:
 
         self.end = datetime.now().strftime("%H:%M:%S")
         dfs = pd.read_csv(bookpath)
-        dfc=pd.read_csv(computerpath)
-        self.computer_id = dfc.at[session_id,'Computer_ID']
+        dfc = pd.read_csv(computerpath)
+        self.computer_id = dfs.at[session_id,'Computer_ID']
+        self.computer_id=int(self.computer_id)
         dfc.at[self.computer_id,'available'] = 0
         dfc.to_csv(computerpath,index=False)
         dfs.at[session_id,'End'] = self.end
-        self.fees = self.calculate_session_time() + drinks.Calculate_Drinks_Cost(self.session_id)
-        dfs.at[self.session_id,'Fees'] = self.fees
+        dfs.to_csv(bookpath,index=False)
+        self.fees = self.calculate_session_time(session_id)*2 + drinks.Calculate_Drinks_Cost(session_id)
+        dfs.at[session_id,'Fees'] = self.fees
         dfs.to_csv(bookpath,index=False)
         print("Session has been ended")
-        # dfs = dfs.drop(session_id, axis="rows")
-
-
-    # def _calculate_fees(self, ):
-    #     self.fees = self.calculate_session_time() + drinks.Calculate_Drinks_Cost(Session_id)
-    #     return self.fees
-
-
+  
