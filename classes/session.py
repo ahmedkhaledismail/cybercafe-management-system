@@ -40,7 +40,8 @@ class session:
                         "Computer_ID": self.computer_id,
                         "Start": self.start,
                         "End": self.end,
-                        "Drinks": "0",}                                    
+                        "Drinks": "",
+                        "Fees":""}                                    
                         dfs = dfs.append(new_row , ignore_index=True)
                         dfs.to_csv(bookpath,index=False)
                         break 
@@ -49,16 +50,18 @@ class session:
             print("Sorry no available computer")
             
 
-    def end_session(self,user_name):
+    def end_session(self,session_id):
 
         self.end = datetime.now().strftime("%H:%M:%S")
         dfs = pd.read_csv(bookpath)
         dfc=pd.read_csv(computerpath)
+        self.computer_id = dfc.at[session_id,'Computer_ID']
         dfc.at[self.computer_id,'available'] = 0
         dfc.to_csv(computerpath,index=False)
-        dfs.at[self.session_id,'End'] = self.end
-        dfs.to_csv(bookpath,index=False)
+        dfs.at[session_id,'End'] = self.end
         self.fees = self.calculate_session_time() + drinks.Calculate_Drinks_Cost(self.session_id)
+        dfs.at[self.session_id,'Fees'] = self.fees
+        dfs.to_csv(bookpath,index=False)
         print("Session has been ended")
         # dfs = dfs.drop(session_id, axis="rows")
 
