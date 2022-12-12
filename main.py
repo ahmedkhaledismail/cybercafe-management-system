@@ -182,7 +182,13 @@ def main():
                                                 )
                                                 if computer_entry_input == 1:
                                                     # 1. Add New Computer
-                                                    pass
+                                                    while True:
+                                                        cpu = input('Please enter the cpu Model :')
+                                                        if cpu != '':
+                                                            break;
+                                                        print('Error : Empty input')
+                                                    
+                                                    
                                                 elif computer_entry_input == 2:
                                                     # 2. Show Computer
                                                     pass
