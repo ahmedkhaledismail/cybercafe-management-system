@@ -24,5 +24,18 @@
             "password": "123",
             "user_id": "2323"
         }
+    },
+    {
+        "ahmed_khalid": {
+            "first_name": "emad",
+            "last_name": "khalid",
+            "user_name": "omar",
+            "phone_number": "0112354545",
+            "address": "giza",
+            "age": 21,
+            "role": "admin",
+            "password": "12345678A",
+            "user_id": "2323"
+        }
     }
 ]
