@@ -43,11 +43,13 @@ class computer:
         self.__gpu = gpu
         self.__storage = storage 
         self.__computer_id = computer_id 
+        self.__available = 0
 
         df.at[self.__computer_id,"cpu"] = self.__cpu
         df.at[self.__computer_id,"ram"] = self.__ram
         df.at[self.__computer_id,"gpu"] = self.__gpu
         df.at[self.__computer_id,"storage"] = self.__storage
+        df.at[self.__computer_id,"available"] = self.__available
 
         #df.loc[self.__computer_id] = [self.__ram,self.__gpu,self.__storage,self.__cpu]
         df.to_csv('databases\Computer_Tbl.CSV')
@@ -56,10 +58,13 @@ class computer:
         
 
     def Delete_Computer_by_index(self,x):
-        df = pd.read_csv('databases\Computer_Tbl.CSV', index_col=[0])
-        df = df.drop(x)
-        df.to_csv('databases\Computer_Tbl.CSV')
-        print('Computer was deleted successfully!')
+        try:
+            df = pd.read_csv('databases\Computer_Tbl.CSV', index_col=[0])
+            df = df.drop(x)
+            df.to_csv('databases\Computer_Tbl.CSV')
+            print('Computer was deleted successfully!')
+        except IndexError:
+            print('Invalid computer ID')
 
     def Search_Record(self,Key_word):
         df = pd.read_csv('databases\Computer_Tbl.CSV', index_col=[0])        

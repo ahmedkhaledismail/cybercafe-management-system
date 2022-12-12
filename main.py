@@ -7,8 +7,12 @@ from project import constants as CONSTANTS
 from databases import queries as QUERIES
 
 from classes.session import session
+from classes import computer,drinks
 
 import classes.admin as ADMIN
+
+comp = computer.computer()
+
 
 # login
 #   member
@@ -183,24 +187,98 @@ def main():
                                                 if computer_entry_input == 1:
                                                     # 1. Add New Computer
                                                     while True:
-                                                        cpu = input('Please enter the cpu Model :')
+                                                        cpu = input('Please enter the cpu model :')
                                                         if cpu != '':
                                                             break;
                                                         print('Error : Empty input')
+
+                                                    while True:
+                                                        ram = input('Please enter the ram size :')
+                                                        if ram != '':
+                                                            break;
+                                                        print('Error : Empty input')
+
+                                                    while True:
+                                                        gpu = input('Please enter the gpu model :')
+                                                        if gpu != '':
+                                                            break;
+                                                        print('Error : Empty input')
+
+                                                    while True:
+                                                        storage = input('Please enter the storage size :')
+                                                        if storage != '':
+                                                            break;
+                                                        print('Error : Empty input')   
+
                                                     
-                                                    
+                                                    comp.Add_New_Computer(cpu,ram,gpu,storage)
+                                                    cpu = None
+                                                    ram = None
+                                                    gpu = None
+                                                    storage = None
+
                                                 elif computer_entry_input == 2:
-                                                    # 2. Show Computer
-                                                    pass
+                                                    print(comp.Show_All_Computers())
+                                                    
                                                 elif computer_entry_input == 3:
                                                     # 3. Update Record
-                                                    pass
+                                                    while True:
+                                                        computer_id = input('Please enter the computer ID :')
+                                                        if computer_id != '':
+                                                            break;
+                                                        print('Error : Empty input')
+
+                                                    while True:
+                                                        cpu = input('Please enter the cpu model :')
+                                                        if cpu != '':
+                                                            break;
+                                                        print('Error : Empty input')
+
+                                                    while True:
+                                                        ram = input('Please enter the ram size :')
+                                                        if ram != '':
+                                                            break;
+                                                        print('Error : Empty input')
+
+                                                    while True:
+                                                        gpu = input('Please enter the gpu model :')
+                                                        if gpu != '':
+                                                            break;
+                                                        print('Error : Empty input')
+
+                                                    while True:
+                                                        storage = input('Please enter the storage size :')
+                                                        if storage != '':
+                                                            break;
+                                                        print('Error : Empty input')
+
+                                                    comp.Update_Record(computer_id,cpu,ram,gpu,storage)
+                                                    computer_id = None
+                                                    cpu = None
+                                                    ram = None
+                                                    gpu = None
+                                                    storage = None
+
                                                 elif computer_entry_input == 4:
                                                     # 4. Delete Record
-                                                    pass
+                                                    while True:
+                                                        computer_id = int(input('Please enter the computer ID :'))
+                                                        if computer_id != '':
+                                                            break;
+                                                        print('Error : Empty input')
+                                                    comp.Delete_Computer_by_index(computer_id)
+                                                    computer_id = None
                                                 elif computer_entry_input == 5:
                                                     # 5. Search Record
-                                                    pass
+                                                    while True:
+                                                        Key_word = input('What do you want to search about? ')
+                                                        if Key_word != '':
+                                                            break;
+                                                        print('Error : Empty input')
+                                                    print(comp.Search_Record(Key_word))
+                                                    Key_word = None
+
+
                                         elif master_entry_input == 3:
                                             session_entry_input = None
                                             while session_entry_input != 3:
