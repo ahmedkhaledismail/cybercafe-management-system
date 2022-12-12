@@ -40,23 +40,23 @@ def get_phone_number(placeholder):
 
 
 def get_password(placeholder):
-    numbers_count = 0
-    capital_letters_count = 0
+    # numbers_count = 0
+    # capital_letters_count = 0
     while True:
         password = input(placeholder)
-        for char in password:
-            if char.isnumeric():
-                numbers_count += 1
-            elif char.isupper():
-                capital_letters_count += 1
-        if len(password) < 8:
-            print(colored("password must have at least 8 letters", "red"))
-        elif numbers_count == 0:
-            print(colored("password must have at least 1 number", "red"))
-        elif capital_letters_count == 0:
-            print(colored("password must have at least 1 capital letter", "red"))
-        else:
-            return password
+        # for char in password:
+        #     if char.isnumeric():
+        #         numbers_count += 1
+        #     elif char.isupper():
+        #         capital_letters_count += 1
+        # if len(password) < 8:
+        #     print(colored("password must have at least 8 letters", "red"))
+        # elif numbers_count == 0:
+        #     print(colored("password must have at least 1 number", "red"))
+        # elif capital_letters_count == 0:
+        #     print(colored("password must have at least 1 capital letter", "red"))
+        # else:
+        return password
 
 
 def get_name(placeholder):
