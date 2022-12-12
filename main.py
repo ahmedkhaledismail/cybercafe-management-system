@@ -6,6 +6,8 @@ from project import validators as VALIDATORS
 from project import constants as CONSTANTS
 from databases import queries as QUERIES
 
+from classes.session import session
+
 import classes.admin as ADMIN
 
 # login
@@ -193,6 +195,38 @@ def main():
                                                 elif computer_entry_input == 5:
                                                     # 5. Search Record
                                                     pass
+                                        elif master_entry_input == 3:
+                                            session_entry_input = None
+                                            while session_entry_input != 3:
+                                                os.system("clear")
+                                                print("1. Start New Session")
+                                                print("2. End Existing Session")
+                                                print("3. Return")
+                                                session_entry_input = (
+                                                    VALIDATORS.get_numeric("\n> ", 1, 3)
+                                                )
+                                                if session_entry_input == 1:
+                                                    user_name = VALIDATORS.get_user_name("Enter user name")
+                                                    res = QUERIES.lookup_item(CONSTANTS.USERS_DATABASE, user_name)[1]
+                                                    if res == CONSTANTS.ITEM_EXIST:
+                                                        session_obj = session(user_name)
+                                                        session_obj.start_session()
+                                                    else:
+                                                        print(
+                                                            colored(
+                                                                "\nUSER DOES NOT EXIST EXCEPTION: user '{}' does not exist in '{}' database".format(
+                                                                    user_name, CONSTANTS.USERS_DATABASE
+                                                                ),
+                                                                "red",
+                                                            )
+                                                        )
+                                                elif session_entry_input == 2:
+                                                        session_obj.end_session()
+                                                    
+                                                elif session_entry_input == 3:
+                                                    # 3. Update Record
+                                                    pass
+                                               
 
                                         elif master_entry_input == 4:
                                             # return option
