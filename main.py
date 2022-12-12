@@ -308,8 +308,8 @@ def main():
                                                         session_obj.end_session()
                                                     
                                                 elif session_entry_input == 3:
-                                                    # 3. Update Record
-                                                    pass
+                                                    # 3. return
+                                                    break
                                                
 
                                         elif master_entry_input == 4:
