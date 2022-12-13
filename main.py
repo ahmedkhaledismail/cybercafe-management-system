@@ -4,7 +4,7 @@ from termcolor import colored
 
 from project import validators as VALIDATORS
 from project import constants as CONSTANTS
-from databases import queries as QUERIES
+from project import queries as QUERIES
 
 from classes.session import session
 from classes import computer, drinks
@@ -404,7 +404,7 @@ def main():
                                                         if drink_name != "":
                                                             break
                                                         print("Error : Empty input")
-                                                    
+
                                                     while True:
                                                         drink_Price = input(
                                                             "Please enter the drink Price :"
@@ -413,10 +413,11 @@ def main():
                                                             break
                                                         print("Error : Empty input")
 
-                                                    drink.add_drink(drink_name,drink_Price)
+                                                    drink.add_drink(
+                                                        drink_name, drink_Price
+                                                    )
                                                     drink_name = None
                                                     drink_Price = None
-
 
                                                 elif drinks_entry_input == 2:
                                                     # 2. Show Drinks
@@ -425,9 +426,11 @@ def main():
                                                 elif drinks_entry_input == 3:
                                                     # 3. Update Record
                                                     while True:
-                                                        Drink_id = int(input(
-                                                            "Please enter the drink ID :"
-                                                        ))
+                                                        Drink_id = int(
+                                                            input(
+                                                                "Please enter the drink ID :"
+                                                            )
+                                                        )
                                                         if Drink_id != "":
                                                             break
                                                         print("Error : Empty input")
@@ -439,7 +442,7 @@ def main():
                                                         if drink_name != "":
                                                             break
                                                         print("Error : Empty input")
-                                                    
+
                                                     while True:
                                                         drink_Price = input(
                                                             "Please enter the drink Price :"
@@ -448,7 +451,11 @@ def main():
                                                             break
                                                         print("Error : Empty input")
 
-                                                    drink.Update_Record(Drink_id,drink_name,drink_Price)
+                                                    drink.Update_Record(
+                                                        Drink_id,
+                                                        drink_name,
+                                                        drink_Price,
+                                                    )
                                                     drink_name = None
                                                     Drink_id = None
                                                     drink_Price = None
@@ -456,13 +463,17 @@ def main():
                                                 elif drinks_entry_input == 4:
                                                     # 4. Delete Record
                                                     while True:
-                                                        Drink_id = int(input(
-                                                            "Please enter the drink ID :"
-                                                        ))
+                                                        Drink_id = int(
+                                                            input(
+                                                                "Please enter the drink ID :"
+                                                            )
+                                                        )
                                                         if Drink_id != "":
                                                             break
                                                         print("Error : Empty input")
-                                                    drink.Delete_Drink_by_index(Drink_id)
+                                                    drink.Delete_Drink_by_index(
+                                                        Drink_id
+                                                    )
                                                     Drink_id = None
 
                                                 elif drinks_entry_input == 5:
@@ -523,4 +534,5 @@ def main():
     exit()
 
 
-main()
+if __name__ == "__main__":
+    main()

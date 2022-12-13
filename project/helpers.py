@@ -5,7 +5,7 @@ sys.path.insert(
     "/Users/ahmedkhaled/Desktop/Ahmed Khalid/MSA University/Computer Engineering/Third Year/First Semester/Concepts of Programming Languages/project/CybercafeManagementSystem",
 )
 from project import constants as CONSTANTS
-from databases import queries as QUERIES
+from project import queries as QUERIES
 
 
 def suggest_user_name(user_name):

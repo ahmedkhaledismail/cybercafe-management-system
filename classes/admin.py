@@ -10,7 +10,7 @@ from classes.user import user
 from project import constants as CONSTANTS
 from project import validators as VALIDATORS
 from project import helpers as HELPERS
-from databases import queries as QUERIES
+from project import queries as QUERIES
 
 
 class admin(user):
