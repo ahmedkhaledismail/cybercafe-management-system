@@ -6,13 +6,6 @@ __pycache__/
 # C extensions
 *.so
 
-testing.py
-testingsafe.py
-booking.py
-renew.py
-charges.py
-testing.json
-
 # Distribution / packaging
 .Python
 build/
