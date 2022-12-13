@@ -268,6 +268,7 @@ def main():
                                                         print('Error : Empty input')
                                                     comp.Delete_Computer_by_index(computer_id)
                                                     computer_id = None
+                                                    
                                                 elif computer_entry_input == 5:
                                                     # 5. Search Record
                                                     while True:
