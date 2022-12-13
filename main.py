@@ -12,6 +12,7 @@ from classes import computer, drinks
 import classes.admin as ADMIN
 
 comp = computer.computer()
+drink = drinks.drinks()
 
 
 # login
@@ -396,19 +397,85 @@ def main():
                                                 )
                                                 if drinks_entry_input == 1:
                                                     # 1. Add New Drink
-                                                    pass
+                                                    while True:
+                                                        drink_name = input(
+                                                            "Please enter the drink name :"
+                                                        )
+                                                        if drink_name != "":
+                                                            break
+                                                        print("Error : Empty input")
+                                                    
+                                                    while True:
+                                                        drink_Price = input(
+                                                            "Please enter the drink Price :"
+                                                        )
+                                                        if drink_Price != "":
+                                                            break
+                                                        print("Error : Empty input")
+
+                                                    drink.add_drink(drink_name,drink_Price)
+                                                    drink_name = None
+                                                    drink_Price = None
+
+
                                                 elif drinks_entry_input == 2:
                                                     # 2. Show Drinks
-                                                    pass
+                                                    print(drink.Show_All_Drinks())
+
                                                 elif drinks_entry_input == 3:
                                                     # 3. Update Record
-                                                    pass
+                                                    while True:
+                                                        Drink_id = int(input(
+                                                            "Please enter the drink ID :"
+                                                        ))
+                                                        if Drink_id != "":
+                                                            break
+                                                        print("Error : Empty input")
+
+                                                    while True:
+                                                        drink_name = input(
+                                                            "Please enter the drink name :"
+                                                        )
+                                                        if drink_name != "":
+                                                            break
+                                                        print("Error : Empty input")
+                                                    
+                                                    while True:
+                                                        drink_Price = input(
+                                                            "Please enter the drink Price :"
+                                                        )
+                                                        if drink_Price != "":
+                                                            break
+                                                        print("Error : Empty input")
+
+                                                    drink.Update_Record(Drink_id,drink_name,drink_Price)
+                                                    drink_name = None
+                                                    Drink_id = None
+                                                    drink_Price = None
+
                                                 elif drinks_entry_input == 4:
                                                     # 4. Delete Record
-                                                    pass
+                                                    while True:
+                                                        Drink_id = int(input(
+                                                            "Please enter the drink ID :"
+                                                        ))
+                                                        if Drink_id != "":
+                                                            break
+                                                        print("Error : Empty input")
+                                                    drink.Delete_Drink_by_index(Drink_id)
+                                                    Drink_id = None
+
                                                 elif drinks_entry_input == 5:
                                                     # 5. Search Record
-                                                    pass
+                                                    while True:
+                                                        Key_word = input(
+                                                            "What do you want to search about? "
+                                                        )
+                                                        if Key_word != "":
+                                                            break
+                                                        print("Error : Empty input")
+                                                    print(comp.Search_Record(Key_word))
+                                                    Key_word = None
 
                                 elif admin_input == 3:
                                     # logout admin
