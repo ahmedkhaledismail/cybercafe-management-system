@@ -7,7 +7,7 @@ from project import constants as CONSTANTS
 from databases import queries as QUERIES
 
 from classes.session import session
-from classes import computer,drinks
+from classes import computer, drinks
 
 import classes.admin as ADMIN
 
@@ -44,7 +44,13 @@ comp = computer.computer()
 #             Take charges
 #             Show Charges
 #             Return
-#         Renewal
+#         Booking
+#             Add New Drink
+#             Show Drinks
+#             Update Record
+#             Delete Record
+#             Search Record
+#             Return
 #     Return
 # create account
 # Exit
@@ -187,31 +193,40 @@ def main():
                                                 if computer_entry_input == 1:
                                                     # 1. Add New Computer
                                                     while True:
-                                                        cpu = input('Please enter the cpu model :')
-                                                        if cpu != '':
-                                                            break;
-                                                        print('Error : Empty input')
+                                                        cpu = input(
+                                                            "Please enter the cpu model :"
+                                                        )
+                                                        if cpu != "":
+                                                            break
+                                                        print("Error : Empty input")
 
                                                     while True:
-                                                        ram = input('Please enter the ram size :')
-                                                        if ram != '':
-                                                            break;
-                                                        print('Error : Empty input')
+                                                        ram = input(
+                                                            "Please enter the ram size :"
+                                                        )
+                                                        if ram != "":
+                                                            break
+                                                        print("Error : Empty input")
 
                                                     while True:
-                                                        gpu = input('Please enter the gpu model :')
-                                                        if gpu != '':
-                                                            break;
-                                                        print('Error : Empty input')
+                                                        gpu = input(
+                                                            "Please enter the gpu model :"
+                                                        )
+                                                        if gpu != "":
+                                                            break
+                                                        print("Error : Empty input")
 
                                                     while True:
-                                                        storage = input('Please enter the storage size :')
-                                                        if storage != '':
-                                                            break;
-                                                        print('Error : Empty input')   
+                                                        storage = input(
+                                                            "Please enter the storage size :"
+                                                        )
+                                                        if storage != "":
+                                                            break
+                                                        print("Error : Empty input")
 
-                                                    
-                                                    comp.Add_New_Computer(cpu,ram,gpu,storage)
+                                                    comp.Add_New_Computer(
+                                                        cpu, ram, gpu, storage
+                                                    )
                                                     cpu = None
                                                     ram = None
                                                     gpu = None
@@ -219,40 +234,56 @@ def main():
 
                                                 elif computer_entry_input == 2:
                                                     print(comp.Show_All_Computers())
-                                                    
+
                                                 elif computer_entry_input == 3:
                                                     # 3. Update Record
                                                     while True:
-                                                        computer_id = input('Please enter the computer ID :')
-                                                        if computer_id != '':
-                                                            break;
-                                                        print('Error : Empty input')
+                                                        computer_id = input(
+                                                            "Please enter the computer ID :"
+                                                        )
+                                                        if computer_id != "":
+                                                            break
+                                                        print("Error : Empty input")
 
                                                     while True:
-                                                        cpu = input('Please enter the cpu model :')
-                                                        if cpu != '':
-                                                            break;
-                                                        print('Error : Empty input')
+                                                        cpu = input(
+                                                            "Please enter the cpu model :"
+                                                        )
+                                                        if cpu != "":
+                                                            break
+                                                        print("Error : Empty input")
 
                                                     while True:
-                                                        ram = input('Please enter the ram size :')
-                                                        if ram != '':
-                                                            break;
-                                                        print('Error : Empty input')
+                                                        ram = input(
+                                                            "Please enter the ram size :"
+                                                        )
+                                                        if ram != "":
+                                                            break
+                                                        print("Error : Empty input")
 
                                                     while True:
-                                                        gpu = input('Please enter the gpu model :')
-                                                        if gpu != '':
-                                                            break;
-                                                        print('Error : Empty input')
+                                                        gpu = input(
+                                                            "Please enter the gpu model :"
+                                                        )
+                                                        if gpu != "":
+                                                            break
+                                                        print("Error : Empty input")
 
                                                     while True:
-                                                        storage = input('Please enter the storage size :')
-                                                        if storage != '':
-                                                            break;
-                                                        print('Error : Empty input')
+                                                        storage = input(
+                                                            "Please enter the storage size :"
+                                                        )
+                                                        if storage != "":
+                                                            break
+                                                        print("Error : Empty input")
 
-                                                    comp.Update_Record(computer_id,cpu,ram,gpu,storage)
+                                                    comp.Update_Record(
+                                                        computer_id,
+                                                        cpu,
+                                                        ram,
+                                                        gpu,
+                                                        storage,
+                                                    )
                                                     computer_id = None
                                                     cpu = None
                                                     ram = None
@@ -262,23 +293,30 @@ def main():
                                                 elif computer_entry_input == 4:
                                                     # 4. Delete Record
                                                     while True:
-                                                        computer_id = int(input('Please enter the computer ID :'))
-                                                        if computer_id != '':
-                                                            break;
-                                                        print('Error : Empty input')
-                                                    comp.Delete_Computer_by_index(computer_id)
+                                                        computer_id = int(
+                                                            input(
+                                                                "Please enter the computer ID :"
+                                                            )
+                                                        )
+                                                        if computer_id != "":
+                                                            break
+                                                        print("Error : Empty input")
+                                                    comp.Delete_Computer_by_index(
+                                                        computer_id
+                                                    )
                                                     computer_id = None
-                                                    
+
                                                 elif computer_entry_input == 5:
                                                     # 5. Search Record
                                                     while True:
-                                                        Key_word = input('What do you want to search about? ')
-                                                        if Key_word != '':
-                                                            break;
-                                                        print('Error : Empty input')
+                                                        Key_word = input(
+                                                            "What do you want to search about? "
+                                                        )
+                                                        if Key_word != "":
+                                                            break
+                                                        print("Error : Empty input")
                                                     print(comp.Search_Record(Key_word))
                                                     Key_word = None
-
 
                                         elif master_entry_input == 3:
                                             session_entry_input = None
@@ -291,8 +329,15 @@ def main():
                                                     VALIDATORS.get_numeric("\n> ", 1, 3)
                                                 )
                                                 if session_entry_input == 1:
-                                                    user_name = VALIDATORS.get_user_name("Enter user name")
-                                                    res = QUERIES.lookup_item(CONSTANTS.USERS_DATABASE, user_name)[1]
+                                                    user_name = (
+                                                        VALIDATORS.get_user_name(
+                                                            "Enter user name"
+                                                        )
+                                                    )
+                                                    res = QUERIES.lookup_item(
+                                                        CONSTANTS.USERS_DATABASE,
+                                                        user_name,
+                                                    )[1]
                                                     if res == CONSTANTS.ITEM_EXIST:
                                                         session_obj = session(user_name)
                                                         session_obj.start_session()
@@ -300,18 +345,18 @@ def main():
                                                         print(
                                                             colored(
                                                                 "\nUSER DOES NOT EXIST EXCEPTION: user '{}' does not exist in '{}' database".format(
-                                                                    user_name, CONSTANTS.USERS_DATABASE
+                                                                    user_name,
+                                                                    CONSTANTS.USERS_DATABASE,
                                                                 ),
                                                                 "red",
                                                             )
                                                         )
                                                 elif session_entry_input == 2:
-                                                        session_obj.end_session()
-                                                    
+                                                    session_obj.end_session()
+
                                                 elif session_entry_input == 3:
                                                     # 3. return
                                                     break
-                                               
 
                                         elif master_entry_input == 4:
                                             # return option
@@ -319,12 +364,12 @@ def main():
 
                                 elif admin_input == 2:
                                     cafe_management_entry_input = None
-                                    # cafe management options starts here
+                                    # cafe management options start here
                                     while cafe_management_entry_input != 4:
                                         os.system("clear")
                                         print("1. Bookings")
                                         print("2. Charges")
-                                        print("3. Renewal")
+                                        print("3. Drinks")
                                         print("4. Return")
                                         cafe_management_entry_input = (
                                             VALIDATORS.get_numeric("\n> ", 1, 4)
@@ -336,8 +381,34 @@ def main():
                                             # charges
                                             pass
                                         elif cafe_management_entry_input == 3:
-                                            # renewal
-                                            pass
+                                            # drinks management options start here
+                                            drinks_entry_input = None
+                                            while drinks_entry_input != 6:
+                                                os.system("clear")
+                                                print("1. Add New Drink")
+                                                print("2. Show Drinks")
+                                                print("3. Update Record")
+                                                print("4. Delete Record")
+                                                print("5. Search Record")
+                                                print("6. Return")
+                                                drinks_entry_input = (
+                                                    VALIDATORS.get_numeric("\n> ", 1, 6)
+                                                )
+                                                if drinks_entry_input == 1:
+                                                    # 1. Add New Drink
+                                                    pass
+                                                elif drinks_entry_input == 2:
+                                                    # 2. Show Drinks
+                                                    pass
+                                                elif drinks_entry_input == 3:
+                                                    # 3. Update Record
+                                                    pass
+                                                elif drinks_entry_input == 4:
+                                                    # 4. Delete Record
+                                                    pass
+                                                elif drinks_entry_input == 5:
+                                                    # 5. Search Record
+                                                    pass
 
                                 elif admin_input == 3:
                                     # logout admin
