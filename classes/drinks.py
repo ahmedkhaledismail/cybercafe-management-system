@@ -98,9 +98,11 @@ class drinks:
             Drinks_menu_Tbl = pd.read_csv('databases\Drinks_menu_Tbl.CSV', index_col=[0])
 
             df = pd.merge(Sold_drinks_Tbl,Drinks_menu_Tbl['drink_price'],how ='inner',left_on='Drink_id', right_index=True)
+
+            if Session_id not in df['Session_id'].values:
+                return('Invalid Session ID')
             return(df[df['Session_id'] == Session_id]['drink_price'].sum())
-        except KeyError:
-            return('Invalid Session ID')
+
         except FileNotFoundError:
             return('CSV file not found')
         except:
