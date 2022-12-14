@@ -100,7 +100,7 @@ class drinks:
             df = pd.merge(Sold_drinks_Tbl,Drinks_menu_Tbl['drink_price'],how ='inner',left_on='Drink_id', right_index=True)
             return(df[df['Session_id'] == Session_id]['drink_price'].sum())
         except KeyError:
-            return('Invalid computer ID')
+            return('Invalid Session ID')
         except FileNotFoundError:
             return('CSV file not found')
         except:
