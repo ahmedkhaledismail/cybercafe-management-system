@@ -13,7 +13,9 @@ def get_numeric(placeholder, min_value=None, max_value=None):
         except ValueError:
             print(colored("Input type must be in int.", "red"))
             continue
-        if max_value is not None and user_input > max_value:
+        if min_value == max_value:
+            print(colored("Input must be equal to {0}.".format(max_value), "red"))
+        elif max_value is not None and user_input > max_value:
             print(
                 colored(
                     "Input must be less than or equal to {0}.".format(max_value), "red"

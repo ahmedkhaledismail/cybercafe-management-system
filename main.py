@@ -165,13 +165,71 @@ def main():
                                                 )
                                                 if member_entry_input == 1:
                                                     # 1. Add New Member
-                                                    pass
+                                                    os.system("clear")
+                                                    admin_object.add_new_member()
                                                 elif member_entry_input == 2:
                                                     # 2. Show Member
-                                                    pass
+                                                    while True:
+                                                        os.system("clear")
+                                                        member_user_name = (
+                                                            VALIDATORS.get_user_name(
+                                                                "Enter user name: "
+                                                            )
+                                                        )
+                                                        admin_object.show_member(
+                                                            member_user_name
+                                                        )
+                                                        show_member_option_input = VALIDATORS.get_numeric(
+                                                            "\n\nChoose an option to continue: \n1. show another user\n2. return\nYour input is: ",
+                                                            1,
+                                                            2,
+                                                        )
+                                                        if (
+                                                            show_member_option_input
+                                                            == 2
+                                                        ):
+                                                            break
+
                                                 elif member_entry_input == 3:
                                                     # 3. Update Record
-                                                    pass
+                                                    while True:
+                                                        os.system("clear")
+                                                        member_user_name = (
+                                                            VALIDATORS.get_user_name(
+                                                                "Enter user name: "
+                                                            )
+                                                        )
+                                                        member_key = input(
+                                                            "Enter attribute name: "
+                                                        )
+                                                        member_value = input(
+                                                            "Enter new value of {}: ".format(
+                                                                member_key
+                                                            )
+                                                        )
+
+                                                        admin_object.update_record(
+                                                            member_user_name,
+                                                            member_key,
+                                                            member_value,
+                                                        )
+
+                                                        print(
+                                                            "\n {} attributes after updaing are: \n"
+                                                        )
+                                                        admin_object.show_member(
+                                                            member_user_name
+                                                        )
+                                                        update_member_option_input = VALIDATORS.get_numeric(
+                                                            "\n\nChoose an option to continue: \n1. update attribute of another user\n2. return\nYour input is: ",
+                                                            1,
+                                                            2,
+                                                        )
+                                                        if (
+                                                            update_member_option_input
+                                                            == 2
+                                                        ):
+                                                            break
                                                 elif member_entry_input == 4:
                                                     # 4. Delete Record
                                                     pass

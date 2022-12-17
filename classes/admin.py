@@ -1,4 +1,5 @@
 import sys
+from termcolor import colored
 
 sys.path.insert(
     1,
@@ -23,11 +24,14 @@ class admin(user):
         )
         if response == CONSTANTS.ITEM_EXIST:
             for key, value in member_attributes.items():
-                print("member {} is {}".format(key, value))
+                print("user {} is {}".format(key, value))
         elif response == CONSTANTS.ITEM_DOES_NOT_EXIST:
             print(
-                "ERROR admin.show_member(): the item '{}' does not exist in the '{}' database".format(
-                    member_user_name, CONSTANTS.USERS_DATABASE
+                colored(
+                    "USER DOES NOT EXISTS EXCEPTION: user name '{}' does not exist in the '{}' database".format(
+                        member_user_name, CONSTANTS.USERS_DATABASE
+                    ),
+                    "red",
                 )
             )
 
@@ -43,8 +47,11 @@ class admin(user):
             if res == CONSTANTS.ITEM_EXIST:
                 continue
             print(
-                "ERROR: user name '{}' is already registered, you can use '{}' as a user name".format(
-                    user_name, suggested_user_name
+                colored(
+                    "USER ALREADY EXISTS EXCEPTION: user name '{}' is already registered, you can use '{}' as a user name".format(
+                        user_name, suggested_user_name
+                    ),
+                    "red",
                 )
             )
             user_name = VALIDATORS.get_user_name("\nEnter user name: ")
