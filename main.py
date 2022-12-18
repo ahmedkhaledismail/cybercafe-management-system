@@ -411,7 +411,8 @@ def main():
                                                             )
                                                         )
                                                 elif session_entry_input == 2:
-                                                    session_obj.end_session()
+                                                    
+                                                    session.end_session()
 
                                                 elif session_entry_input == 3:
                                                     # 3. return

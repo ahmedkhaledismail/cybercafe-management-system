@@ -100,7 +100,7 @@ class drinks:
             df = pd.merge(Sold_drinks_Tbl,Drinks_menu_Tbl['drink_price'],how ='inner',left_on='Drink_id', right_index=True)
 
             if Session_id not in df['Session_id'].values:
-                return('Invalid Session ID')
+                return(0)
             return(df[df['Session_id'] == Session_id]['drink_price'].sum())
 
         except FileNotFoundError:

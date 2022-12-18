@@ -12,23 +12,23 @@ class session:
         self.session_id = None
         self.computer_id = None
         self.user_name = user_name
-        self.start = None
-        self.end = None
-        self.fees = None
+        self.start = 0
+        self.end = 0
+        self.fees = 0
 
-    @staticmethod
-    def calculate_session_time(session_id):
-        dfs = pd.read_csv(bookpath)
+    # @staticmethod
+    # def calculate_session_time(session_id):
+    #     dfs = pd.read_csv(bookpath)
 
-        start = dfs.at[session_id, "Start"]
-        t1 = datetime.strptime(start, "%H:%M:%S")
+    #     start = dfs.at[session_id, "Start"]
+    #     t1 = datetime.strptime(start, "%H:%M:%S")
 
-        end = dfs.at[session_id, "End"]
-        t2 = datetime.strptime(end, "%H:%M:%S")
+    #     end = dfs.at[session_id, "End"]
+    #     t2 = datetime.strptime(end, "%H:%M:%S")
 
-        sec = (t2 - t1).total_seconds()
+    #     sec = (t2 - t1).total_seconds()
 
-        return sec
+    #     return sec
 
     def start_session(self):
         self.start = datetime.now().strftime("%H:%M:%S")
@@ -41,7 +41,7 @@ class session:
             if dfc.at[x, "available"] == 0:
                 flagavailabe = 1
                 dfc.at[x, "available"] = 1
-                dfc.to_csv(computerpath, index=False)
+                
 
                 self.computer_id = x
                 self.session_id = len(dfs)
@@ -56,52 +56,69 @@ class session:
                     "Fees": self.fees,
                 }
                 dfs = dfs.append(new_row, ignore_index=True)
-                dfs.to_csv(bookpath, index=False)
+                
 
                 break
 
         if flagavailabe == 0:
             print("Sorry no available computer")
+        dfc.to_csv(computerpath, index=False)
+        dfs.to_csv(bookpath, index=False)
+
+    def sessions_running():
+        dfs = pd.read_csv(bookpath)
+        flag=False
+        for row in range(len(dfs)):
+            if dfs.at[row, "Fees"] == 0:
+                print(dfs.iloc[[row]])  
+                flag=True
+        return flag
+
 
     @staticmethod
-    def end_session(session_id):
+    def end_session():
         dfs = pd.read_csv(bookpath)
         dfc = pd.read_csv(computerpath)
 
-        end = datetime.now().strftime("%H:%M:%S")
-        computer_id = int(dfs.at[session_id, "Computer_ID"])
-        dfc.at[computer_id, "available"] = 0
-        dfc.to_csv(computerpath, index=False)
-        dfs.at[session_id, "End"] = end
+        session_run=session.sessions_running()
 
-        drinkscost = drinks()
-        drinkscost = drinkscost.Calculate_Drinks_Cost(session_id)
-        dfs.at[session_id, "Drinks"] = drinkscost
-        dfs.to_csv(bookpath, index=False)
+        if session_run == True:
+            try:
+                session_id=int(input("Please Enter The Session ID : "))
 
-        fees = (session.calculate_session_time(session_id) * 2) + drinkscost
-        dfs.at[session_id, "Fees"] = fees
-        dfs.to_csv(bookpath, index=False)
+                end = datetime.now().strftime("%H:%M:%S")
+                dfs.at[session_id, "End"] = end
+                t2 = datetime.strptime(end, "%H:%M:%S")
 
-        print("Session has been ended")
+                computer_id = int(dfs.at[session_id, "Computer_ID"])
+                dfc.at[computer_id, "available"] = 0
+                
+                drinkscost = drinks()
+                drinkscost = drinkscost.Calculate_Drinks_Cost(session_id)
+                dfs.at[session_id, "Drinks"] = drinkscost
 
-    # def end_session(self,session_id):
-    #     dfs = pd.read_csv(bookpath)
-    #     dfc = pd.read_csv(computerpath)
+                start = dfs.at[session_id, "Start"]
+                t1 = datetime.strptime(start, "%H:%M:%S")
 
-    #     self.end = datetime.now().strftime("%H:%M:%S")
-    #     self.computer_id = int(dfs.at[session_id,'Computer_ID'])
-    #     dfc.at[self.computer_id,'available'] = 0
-    #     dfc.to_csv(computerpath,index=False)
-    #     dfs.at[session_id,'End'] = self.end
+                if t2>t1:
+                    sec = (t2 - t1).total_seconds()
+                else:
+                    t1 - 86400
+                    sec = (t2 - t1).total_seconds()
 
-    #     drinkscost=drinks()
-    #     drinkscost=drinkscost.Calculate_Drinks_Cost(session_id)
-    #     dfs.at[session_id,'Drinks'] = drinkscost
-    #     dfs.to_csv(bookpath,index=False)
+            
+                fees = (sec * 2) + drinkscost
+                dfs.at[session_id, "Fees"] = fees
 
-    #     self.fees = (self.calculate_session_time(session_id) * 2 ) + drinkscost
-    #     dfs.at[session_id,'Fees'] = self.fees
-    #     dfs.to_csv(bookpath,index=False)
+                dfs.to_csv(bookpath, index=False)
+                dfc.to_csv(computerpath, index=False)
+                print("Session has been ended")
+            except:
+                print("This Session ID is not assigned to any Session running")
+        else:
+            print("<<There is no sessions running>> ")
+            
+        
 
-    #     print("Session has been ended")
+        
+
