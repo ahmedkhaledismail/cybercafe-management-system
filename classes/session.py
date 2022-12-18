@@ -103,7 +103,7 @@ class session:
                 if t2>t1:
                     sec = (t2 - t1).total_seconds()
                 else:
-                    t1 - 86400
+                    t1-=86400
                     sec = (t2 - t1).total_seconds()
 
             
