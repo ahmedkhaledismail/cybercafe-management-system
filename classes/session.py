@@ -16,22 +16,10 @@ class session:
         self.end = 0
         self.fees = 0
 
-    # @staticmethod
-    # def calculate_session_time(session_id):
-    #     dfs = pd.read_csv(bookpath)
-
-    #     start = dfs.at[session_id, "Start"]
-    #     t1 = datetime.strptime(start, "%H:%M:%S")
-
-    #     end = dfs.at[session_id, "End"]
-    #     t2 = datetime.strptime(end, "%H:%M:%S")
-
-    #     sec = (t2 - t1).total_seconds()
-
-    #     return sec
-
+    
     def start_session(self):
         self.start = datetime.now().strftime("%H:%M:%S")
+
         dfs = pd.read_csv(bookpath)
         dfc = pd.read_csv(computerpath)
 
@@ -87,32 +75,37 @@ class session:
                 session_id=int(input("Please Enter The Session ID : "))
 
                 end = datetime.now().strftime("%H:%M:%S")
-                dfs.at[session_id, "End"] = end
-                t2 = datetime.strptime(end, "%H:%M:%S")
+                if dfs.at[session_id, "End"] == 0:
+                        dfs.at[session_id, "End"] = end
+                        t2 = datetime.strptime(end, "%H:%M:%S")
 
-                computer_id = int(dfs.at[session_id, "Computer_ID"])
-                dfc.at[computer_id, "available"] = 0
-                
-                drinkscost = drinks()
-                drinkscost = drinkscost.Calculate_Drinks_Cost(session_id)
-                dfs.at[session_id, "Drinks"] = drinkscost
+                        computer_id = int(dfs.at[session_id, "Computer_ID"])
+                        dfc.at[computer_id, "available"] = 0
+                        
+                        drinkscost = drinks()
+                        drinkscost = drinkscost.Calculate_Drinks_Cost(session_id)
+                        dfs.at[session_id, "Drinks"] = drinkscost
 
-                start = dfs.at[session_id, "Start"]
-                t1 = datetime.strptime(start, "%H:%M:%S")
+                        start = dfs.at[session_id, "Start"]
+                        t1 = datetime.strptime(start, "%H:%M:%S")
 
-                if t2>t1:
-                    sec = (t2 - t1).total_seconds()
+                        if t2>t1:
+                            sec = (t2 - t1).total_seconds()
+                        else:
+                            
+                            sec = (t2 - t1).total_seconds()
+                            sec+=86400
+
+                    
+                        fees = (sec * 2) + drinkscost
+                        dfs.at[session_id, "Fees"] = fees
+
+                        dfs.to_csv(bookpath, index=False)
+                        dfc.to_csv(computerpath, index=False)
+                        print("Session has been ended")
+
                 else:
-                    t1-=86400
-                    sec = (t2 - t1).total_seconds()
-
-            
-                fees = (sec * 2) + drinkscost
-                dfs.at[session_id, "Fees"] = fees
-
-                dfs.to_csv(bookpath, index=False)
-                dfc.to_csv(computerpath, index=False)
-                print("Session has been ended")
+                    print("The Session chosen is already ended")
             except:
                 print("This Session ID is not assigned to any Session running")
         else:
