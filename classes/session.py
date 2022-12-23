@@ -105,9 +105,9 @@ class session:
                         print("Session has been ended")
 
                 else:
-                    print("The Session chosen is already ended")
+                    print("This Session ID is not assigned to any Session running") # handle if the session id in sessions table but already ended  
             except:
-                print("This Session ID is not assigned to any Session running")
+                print("This Session ID is not assigned to any Session running") # handle if the session id enterd is not in the sessions table 
         else:
             print("<<There is no sessions running>> ")
             
