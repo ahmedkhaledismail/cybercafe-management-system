@@ -4,8 +4,7 @@ sys.path.insert(
     1,
     "/Users/ahmedkhaled/Desktop/Ahmed Khalid/MSA University/Computer Engineering/Third Year/First Semester/Concepts of Programming Languages/project/CybercafeManagementSystem",
 )
-from project import constants as CONSTANTS
-from project import queries as QUERIES
+import queries as QUERIES
 
 
 class user:
@@ -18,10 +17,9 @@ class user:
         self.__role = kwargs.get("role")
         self.__password = kwargs.get("password")
         self.__user_name = kwargs.get("user_name")
-        self.__user_id = self.__create_user_id()
-        res = QUERIES.lookup_item(CONSTANTS.USERS_DATABASE, self.__user_name)[1]
-        if res == CONSTANTS.ITEM_DOES_NOT_EXIST:
-            QUERIES.save_item(CONSTANTS.USERS_DATABASE, kwargs)
+        res = QUERIES.lookup_item("databases/users.json", self.__user_name)
+        if res == None:
+            QUERIES.save_item("databases/users.json", kwargs)
 
     @property
     def fullname(self):
@@ -41,7 +39,7 @@ class user:
     def phone_number(self, phone_number):
         self.__phone_number = phone_number
         QUERIES.update_attribute(
-            CONSTANTS.USERS_DATABASE,
+            "databases/users.json",
             self.__user_name,
             "phone_number",
             phone_number,
@@ -55,7 +53,7 @@ class user:
     def address(self, address):
         self.__address = address
         QUERIES.update_attribute(
-            CONSTANTS.USERS_DATABASE,
+            "databases/users.json",
             self.__user_name,
             "address",
             address,
@@ -69,7 +67,7 @@ class user:
     def age(self, age):
         self.__age = age
         QUERIES.update_attribute(
-            CONSTANTS.USERS_DATABASE,
+            "databases/users.json",
             self.__user_name,
             "age",
             age,
@@ -83,7 +81,7 @@ class user:
     def role(self, role):
         self.__role = role
         QUERIES.update_attribute(
-            CONSTANTS.USERS_DATABASE,
+            "databases/users.json",
             self.__user_name,
             "role",
             role,
@@ -97,7 +95,7 @@ class user:
     def password(self, password):
         self.__password = password
         QUERIES.update_attribute(
-            CONSTANTS.USERS_DATABASE,
+            "databases/users.json",
             self.__user_name,
             "password",
             password,
@@ -111,12 +109,8 @@ class user:
     def user_id(self, user_id):
         self.__user_id = user_id
         QUERIES.update_attribute(
-            CONSTANTS.USERS_DATABASE,
+            "databases/users.json",
             self.__user_name,
             "user_id",
             user_id,
         )
-
-    def __create_user_id(self):
-        CONSTANTS.USER_ID += 1
-        return CONSTANTS.USER_ID

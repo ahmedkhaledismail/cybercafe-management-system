@@ -8,10 +8,8 @@ sys.path.insert(
 
 from classes.member import member
 from classes.user import user
-from project import constants as CONSTANTS
-from project import validators as VALIDATORS
-from project import helpers as HELPERS
-from project import queries as QUERIES
+import validators as VALIDATORS
+import queries as QUERIES
 
 
 class admin(user):
@@ -19,17 +17,17 @@ class admin(user):
         super().__init__(**kwargs)
 
     def show_member(self, member_user_name):
-        member_attributes, response = QUERIES.lookup_item(
-            CONSTANTS.USERS_DATABASE, member_user_name
+        member_attributes = QUERIES.lookup_item(
+            "databases/users.json", member_user_name
         )
-        if response == CONSTANTS.ITEM_EXIST:
+        if member_attributes != None:
             for key, value in member_attributes.items():
                 print("user {} is {}".format(key, value))
-        elif response == CONSTANTS.ITEM_DOES_NOT_EXIST:
+        elif member_attributes == None:
             print(
                 colored(
                     "USER DOES NOT EXISTS EXCEPTION: user name '{}' does not exist in the '{}' database".format(
-                        member_user_name, CONSTANTS.USERS_DATABASE
+                        member_user_name, "databases/users.json"
                     ),
                     "red",
                 )
@@ -40,11 +38,11 @@ class admin(user):
         last_name = VALIDATORS.get_name("Enter user last name: ")
         user_name = VALIDATORS.get_user_name("Enter user name: ")
 
-        res = QUERIES.lookup_item(CONSTANTS.USERS_DATABASE, user_name)[1]
-        while res == CONSTANTS.ITEM_EXIST:
-            suggested_user_name = HELPERS.suggest_user_name(user_name)
-            res = QUERIES.lookup_item(CONSTANTS.USERS_DATABASE, suggested_user_name)[1]
-            if res == CONSTANTS.ITEM_EXIST:
+        res = QUERIES.lookup_item("databases/users.json", user_name)
+        while res != None:
+            suggested_user_name = QUERIES.suggest_user_name(user_name)
+            res = QUERIES.lookup_item("databases/users.json", suggested_user_name)
+            if res != None:
                 continue
             print(
                 colored(
@@ -55,7 +53,7 @@ class admin(user):
                 )
             )
             user_name = VALIDATORS.get_user_name("\nEnter user name: ")
-            res = QUERIES.lookup_item(CONSTANTS.USERS_DATABASE, user_name)[1]
+            res = QUERIES.lookup_item("databases/users.json", user_name)
 
         age = VALIDATORS.get_numeric("Enter user age: ", 10)
         phone_number = VALIDATORS.get_phone_number("Enter user phone number: ")
@@ -86,13 +84,13 @@ class admin(user):
         return member_object
 
     def update_record(self, user_name, key, value):
-        QUERIES.update_attribute(CONSTANTS.USERS_DATABASE, user_name, key, value)
+        QUERIES.update_attribute("databases/users.json", user_name, key, value)
 
     def search_record(self):
         pass
 
     def delete_record(self, user_name):
-        QUERIES.delete_item(CONSTANTS.USERS_DATABASE, user_name)
+        QUERIES.delete_item("databases/users.json", user_name)
 
 
 def construct_object(user_attributes):

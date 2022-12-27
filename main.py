@@ -2,9 +2,8 @@ import os
 import time
 from termcolor import colored
 
-from project import validators as VALIDATORS
-from project import constants as CONSTANTS
-from project import queries as QUERIES
+import validators as VALIDATORS
+import queries as QUERIES
 
 from classes.session import session
 from classes import computer, drinks
@@ -70,14 +69,12 @@ def main():
                 os.system("clear")
                 user_name = VALIDATORS.get_user_name("Enter your user name: ")
                 password = VALIDATORS.get_password("Enter your password: ")
-                user_attributes, response = QUERIES.lookup_item(
-                    CONSTANTS.USERS_DATABASE, user_name
-                )
-                while response == CONSTANTS.ITEM_DOES_NOT_EXIST:
+                user_attributes = QUERIES.lookup_item("databases/users.json", user_name)
+                while user_attributes == None:
                     print(
                         colored(
                             "\nUSER DOES NOT EXIST EXCEPTION: user '{}' does not exist in '{}' database".format(
-                                user_name, CONSTANTS.USERS_DATABASE
+                                user_name, "databases/users.json"
                             ),
                             "red",
                         )
@@ -90,15 +87,15 @@ def main():
                         os.system("clear")
                         user_name = VALIDATORS.get_user_name("Enter your user name: ")
                         password = VALIDATORS.get_password("Enter your password: ")
-                        user_attributes, response = QUERIES.lookup_item(
-                            CONSTANTS.USERS_DATABASE, user_name
+                        user_attributes = QUERIES.lookup_item(
+                            "databases/users.json", user_name
                         )
                     elif option == 2:
                         # Terminate Progrm option
                         break
-                if response == CONSTANTS.ITEM_EXIST:
+                if user_attributes != None:
                     stored_password = QUERIES.get_attribute(
-                        CONSTANTS.USERS_DATABASE, user_name, "password"
+                        "databases/users.json", user_name, "password"
                     )
                     if stored_password != password:
                         print(
@@ -125,8 +122,8 @@ def main():
                             time.sleep(5)
 
                             admin_attributes = QUERIES.lookup_item(
-                                CONSTANTS.USERS_DATABASE, user_name
-                            )[0]
+                                "databases/users.json", user_name
+                            )
                             admin_object = ADMIN.construct_object(admin_attributes)
                             os.system("clear")
                             print(
@@ -215,7 +212,9 @@ def main():
                                                         )
 
                                                         print(
-                                                            "\n {} attributes after updaing are: \n"
+                                                            "\n{} attributes after updating are: \n".format(
+                                                                member_user_name
+                                                            )
                                                         )
                                                         admin_object.show_member(
                                                             member_user_name
@@ -394,10 +393,10 @@ def main():
                                                         )
                                                     )
                                                     res = QUERIES.lookup_item(
-                                                        CONSTANTS.USERS_DATABASE,
+                                                        "databases/users.json",
                                                         user_name,
-                                                    )[1]
-                                                    if res == CONSTANTS.ITEM_EXIST:
+                                                    )
+                                                    if res != None:
                                                         session_obj = session(user_name)
                                                         session_obj.start_session()
                                                     else:
@@ -405,13 +404,13 @@ def main():
                                                             colored(
                                                                 "\nUSER DOES NOT EXIST EXCEPTION: user '{}' does not exist in '{}' database".format(
                                                                     user_name,
-                                                                    CONSTANTS.USERS_DATABASE,
+                                                                    "databases/users.json",
                                                                 ),
                                                                 "red",
                                                             )
                                                         )
                                                 elif session_entry_input == 2:
-                                                    
+
                                                     session.end_session()
 
                                                 elif session_entry_input == 3:

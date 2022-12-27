@@ -6,8 +6,6 @@ sys.path.insert(
     "/Users/ahmedkhaled/Desktop/Ahmed Khalid/MSA University/Computer Engineering/Third Year/First Semester/Concepts of Programming Languages/project/CybercafeManagementSystem",
 )
 
-from project import constants as CONSTANTS
-
 
 def lookup_item(database, item):
     with open(database, "r") as json_database:
@@ -15,13 +13,12 @@ def lookup_item(database, item):
         for entry in dict_database:
             for item_name in entry:
                 if item_name == item:
-                    return entry[item_name], CONSTANTS.ITEM_EXIST
-    return None, CONSTANTS.ITEM_DOES_NOT_EXIST
+                    return entry[item_name]
 
 
 def get_attribute(database, item, key):
-    item_attributes, response = lookup_item(database, item)
-    if response == CONSTANTS.ITEM_EXIST:
+    item_attributes = lookup_item(database, item)
+    if item_attributes != None:
         return item_attributes[key]
 
 
@@ -73,8 +70,8 @@ def save_item(database, item_attributes):
     with open(database, "r") as f:
         json_database = json.load(f)
     item_name = get_item_name(item_attributes)
-    response = lookup_item(database, item_name)[1]
-    if response == CONSTANTS.ITEM_EXIST:
+    response = lookup_item(database, item_name)
+    if response != None:
         print(
             "ERROR save_item(): the item {} already exists in the {} database".format(
                 item_name, database
@@ -112,3 +109,17 @@ def delete_item(database, item):
         del json_database[index]
         with open(database, "w") as f:
             json.dump(json_database, f, indent=4)
+
+
+def suggest_user_name(user_name):
+    counter = 1
+    while True:
+        response = lookup_item("databases/users.json", user_name)
+        if response != None:
+            user_name = user_name + str(counter)
+            counter += 1
+            continue
+        elif response == None:
+            break
+
+    return user_name
