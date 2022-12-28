@@ -110,9 +110,9 @@ class session:
                         print(Fore.GREEN + Style.BRIGHT +"Session has been ended")
 
                 else:
-                    print(Fore.RED + Style.BRIGHT +"1This Session ID is not assigned to any Session running") # handle if the session id in sessions table but already ended  
+                    print(Fore.RED + Style.BRIGHT +"This Session ID is not assigned to any Session running") # handle if the session id in sessions table but already ended  
             except:
-                print(Fore.RED + Style.BRIGHT +"2This Session ID is not assigned to any Session running") # handle if the session id enterd is not in the sessions table 
+                print(Fore.RED + Style.BRIGHT +"This Session ID is not assigned to any Session running") # handle if the session id enterd is not in the sessions table 
         else:
             print(Fore.RED + Style.BRIGHT +"There is no sessions running")
             
