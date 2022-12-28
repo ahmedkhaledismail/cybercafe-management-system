@@ -16,24 +16,22 @@ class admin(user):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-    def show_member(self, member_user_name):
-        member_attributes = QUERIES.lookup_item(
-            "databases/users.json", member_user_name
-        )
-        if member_attributes != None:
-            for key, value in member_attributes.items():
+    def show_user(self, user_name):
+        user_attributes = QUERIES.lookup_item("databases/users.json", user_name)
+        if user_attributes != None:
+            for key, value in user_attributes.items():
                 print("user {} is {}".format(key, value))
-        elif member_attributes == None:
+        elif user_attributes == None:
             print(
                 colored(
                     "USER DOES NOT EXISTS EXCEPTION: user name '{}' does not exist in the '{}' database".format(
-                        member_user_name, "databases/users.json"
+                        user_name, "databases/users.json"
                     ),
                     "red",
                 )
             )
 
-    def add_new_member(self):
+    def add_new_user(self):
         first_name = VALIDATORS.get_name("\nEnter user first name: ")
         last_name = VALIDATORS.get_name("Enter user last name: ")
         user_name = VALIDATORS.get_user_name("Enter user name: ")
@@ -72,19 +70,19 @@ class admin(user):
             "age": age,
         }
         if role == "admin":
-            member_object = admin(**user_attributes)
+            user_object = admin(**user_attributes)
         elif role == "member":
-            # member_object = member(**user_attributes)
-            pass
+            user_object = member(**user_attributes)
         print(
-            "you have successufly created {} {} {} user".format(
+            "you have successufly created {} {} as {} user".format(
                 first_name, last_name, role
             )
         )
-        return member_object
+        return user_object
 
     def update_record(self, user_name, key, value):
-        QUERIES.update_attribute("databases/users.json", user_name, key, value)
+        user_object = construct_object(user_name)
+        user_object.key = value
 
     def search_record(self):
         pass
@@ -93,10 +91,10 @@ class admin(user):
         QUERIES.delete_item("databases/users.json", user_name)
 
 
-def construct_object(user_attributes):
+def construct_object(user_name):
+    user_attributes = QUERIES.lookup_item("databases/users.json", user_name)
     if user_attributes["role"] == "admin":
         constructed_object = admin(**user_attributes)
     elif user_attributes["role"] == "member":
         constructed_object = member(**user_attributes)
-        pass
     return constructed_object

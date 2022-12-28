@@ -22,14 +22,32 @@ class user:
             QUERIES.save_item("databases/users.json", kwargs)
 
     @property
-    def fullname(self):
-        return "{} {}".format(self.__first_name, self.__last_name)
+    def first_name(self):
+        return self.__first_name
 
-    @fullname.setter
-    def fullname(self, fullname):
-        first_name, last_name = fullname.split(" ")
+    @first_name.setter
+    def first_name(self, first_name):
         self.__first_name = first_name
+        QUERIES.update_attribute(
+            "databases/users.json",
+            self.__user_name,
+            "first_name",
+            first_name,
+        )
+
+    @property
+    def last_name(self):
+        return self.__last_name
+
+    @last_name.setter
+    def last_name(self, last_name):
         self.__last_name = last_name
+        QUERIES.update_attribute(
+            "databases/users.json",
+            self.__user_name,
+            "last_name",
+            last_name,
+        )
 
     @property
     def phone_number(self):
@@ -99,18 +117,4 @@ class user:
             self.__user_name,
             "password",
             password,
-        )
-
-    @property
-    def user_id(self):
-        return self.__user_id
-
-    @user_id.setter
-    def user_id(self, user_id):
-        self.__user_id = user_id
-        QUERIES.update_attribute(
-            "databases/users.json",
-            self.__user_name,
-            "user_id",
-            user_id,
         )

@@ -94,9 +94,9 @@ def main():
                         # Terminate Progrm option
                         break
                 if user_attributes != None:
-                    stored_password = QUERIES.get_attribute(
-                        "databases/users.json", user_name, "password"
-                    )
+                    stored_password = QUERIES.lookup_item(
+                        "databases/users.json", user_name
+                    )["password"]
                     if stored_password != password:
                         print(
                             colored(
@@ -121,10 +121,7 @@ def main():
                             )
                             time.sleep(5)
 
-                            admin_attributes = QUERIES.lookup_item(
-                                "databases/users.json", user_name
-                            )
-                            admin_object = ADMIN.construct_object(admin_attributes)
+                            admin_object = ADMIN.construct_object(user_name)
                             os.system("clear")
                             print(
                                 "\n\nWelcome to cybercafe management system admin dashboard\n\n"
@@ -140,99 +137,95 @@ def main():
                                     # master entry options starts here
                                     while master_entry_input != 4:
                                         os.system("clear")
-                                        print("1. member entry")
+                                        print("1. user entry")
                                         print("2. computer entry")
-                                        print("3. session entry")
-                                        print("4. return")
+                                        print("3. return")
                                         master_entry_input = VALIDATORS.get_numeric(
-                                            "\n> ", 1, 4
+                                            "\n> ", 1, 3
                                         )
                                         if master_entry_input == 1:
-                                            member_entry_input = None
-                                            while member_entry_input != 6:
+                                            user_entry_input = None
+                                            while user_entry_input != 6:
                                                 os.system("clear")
-                                                print("1. Add New Member")
-                                                print("2. Show Member")
+                                                print("1. Add New User")
+                                                print("2. Show User")
                                                 print("3. Update Record")
                                                 print("4. Delete Record")
                                                 print("5. Search Record")
                                                 print("6. Return")
-                                                member_entry_input = (
+                                                user_entry_input = (
                                                     VALIDATORS.get_numeric("\n> ", 1, 6)
                                                 )
-                                                if member_entry_input == 1:
-                                                    # 1. Add New Member
+                                                if user_entry_input == 1:
+                                                    # 1. Add New User
                                                     os.system("clear")
-                                                    admin_object.add_new_member()
-                                                elif member_entry_input == 2:
-                                                    # 2. Show Member
+                                                    admin_object.add_new_user()
+                                                elif user_entry_input == 2:
+                                                    # 2. Show User
                                                     while True:
                                                         os.system("clear")
-                                                        member_user_name = (
+                                                        user_name_input = (
                                                             VALIDATORS.get_user_name(
                                                                 "Enter user name: "
                                                             )
                                                         )
-                                                        admin_object.show_member(
-                                                            member_user_name
+                                                        admin_object.show_user(
+                                                            user_name_input
                                                         )
-                                                        show_member_option_input = VALIDATORS.get_numeric(
+                                                        show_user_option_input = VALIDATORS.get_numeric(
                                                             "\n\nChoose an option to continue: \n1. show another user\n2. return\nYour input is: ",
                                                             1,
                                                             2,
                                                         )
-                                                        if (
-                                                            show_member_option_input
-                                                            == 2
-                                                        ):
+                                                        if show_user_option_input == 2:
                                                             break
 
-                                                elif member_entry_input == 3:
+                                                elif user_entry_input == 3:
                                                     # 3. Update Record
                                                     while True:
                                                         os.system("clear")
-                                                        member_user_name = (
+                                                        user_name_input = (
                                                             VALIDATORS.get_user_name(
                                                                 "Enter user name: "
                                                             )
                                                         )
-                                                        member_key = input(
+                                                        user_key = input(
                                                             "Enter attribute name: "
                                                         )
-                                                        member_value = input(
+                                                        user_value = input(
                                                             "Enter new value of {}: ".format(
-                                                                member_key
+                                                                user_key
                                                             )
                                                         )
 
                                                         admin_object.update_record(
-                                                            member_user_name,
-                                                            member_key,
-                                                            member_value,
+                                                            user_name_input,
+                                                            user_key,
+                                                            user_value,
                                                         )
 
                                                         print(
                                                             "\n{} attributes after updating are: \n".format(
-                                                                member_user_name
+                                                                user_name_input
                                                             )
                                                         )
-                                                        admin_object.show_member(
-                                                            member_user_name
+                                                        admin_object.show_user(
+                                                            user_name_input
                                                         )
-                                                        update_member_option_input = VALIDATORS.get_numeric(
+                                                        update_user_option_input = VALIDATORS.get_numeric(
                                                             "\n\nChoose an option to continue: \n1. update attribute of another user\n2. return\nYour input is: ",
                                                             1,
                                                             2,
                                                         )
                                                         if (
-                                                            update_member_option_input
+                                                            update_user_option_input
                                                             == 2
                                                         ):
                                                             break
-                                                elif member_entry_input == 4:
+                                                elif user_entry_input == 4:
                                                     # 4. Delete Record
                                                     pass
-                                                elif member_entry_input == 5:
+                                                elif user_entry_input == 5:
                                                     # 5. Search Record
                                                     pass
                                         elif master_entry_input == 2:
@@ -377,6 +370,23 @@ def main():
                                                     Key_word = None
 
                                         elif master_entry_input == 3:
+                                            # return option
+                                            break
+
+                                elif admin_input == 2:
+                                    cafe_management_entry_input = None
+                                    # cafe management options start here
+                                    while cafe_management_entry_input != 4:
+                                        os.system("clear")
+                                        print("1. Bookings")
+                                        print("2. Charges")
+                                        print("3. Drinks")
+                                        print("4. Return")
+                                        cafe_management_entry_input = (
+                                            VALIDATORS.get_numeric("\n> ", 1, 4)
+                                        )
+                                        if cafe_management_entry_input == 1:
+                                            # bookings
                                             session_entry_input = None
                                             while session_entry_input != 3:
                                                 os.system("clear")
@@ -416,26 +426,6 @@ def main():
                                                 elif session_entry_input == 3:
                                                     # 3. return
                                                     break
-
-                                        elif master_entry_input == 4:
-                                            # return option
-                                            break
-
-                                elif admin_input == 2:
-                                    cafe_management_entry_input = None
-                                    # cafe management options start here
-                                    while cafe_management_entry_input != 4:
-                                        os.system("clear")
-                                        print("1. Bookings")
-                                        print("2. Charges")
-                                        print("3. Drinks")
-                                        print("4. Return")
-                                        cafe_management_entry_input = (
-                                            VALIDATORS.get_numeric("\n> ", 1, 4)
-                                        )
-                                        if cafe_management_entry_input == 1:
-                                            # bookings
-                                            pass
                                         elif cafe_management_entry_input == 2:
                                             # charges
                                             pass
