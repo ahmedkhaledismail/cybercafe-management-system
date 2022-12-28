@@ -1,6 +1,11 @@
 import pandas as pd
+import colorama
+
+from colorama import Fore,Back,Style
 from classes.drinks import drinks
 from datetime import datetime
+
+colorama.init(autoreset=True)
 
 bookpath = r"databases\Book1.csv"
 userpath = r"databases\Users.csv"
@@ -49,7 +54,7 @@ class session:
                 break
 
         if flagavailabe == 0:
-            print("Sorry no available computer")
+            print(Fore.RED + Style.BRIGHT + "Sorry no available computer")
         dfc.to_csv(computerpath, index=False)
         dfs.to_csv(bookpath, index=False)
 
@@ -72,7 +77,7 @@ class session:
 
         if session_run == True:
             try:
-                session_id=int(input("Please Enter The Session ID : "))
+                session_id=int(input(Fore.BLUE + Style.BRIGHT +"Please Enter The Session ID : "))
 
                 end = datetime.now().strftime("%H:%M:%S")
                 if dfs.at[session_id, "End"] == 0:
@@ -102,14 +107,14 @@ class session:
 
                         dfs.to_csv(bookpath, index=False)
                         dfc.to_csv(computerpath, index=False)
-                        print("Session has been ended")
+                        print(Fore.GREEN + Style.BRIGHT +"Session has been ended")
 
                 else:
-                    print("This Session ID is not assigned to any Session running") # handle if the session id in sessions table but already ended  
+                    print(Fore.RED + Style.BRIGHT +"This Session ID is not assigned to any Session running") # handle if the session id in sessions table but already ended  
             except:
-                print("This Session ID is not assigned to any Session running") # handle if the session id enterd is not in the sessions table 
+                print(Fore.RED + Style.BRIGHT +"This Session ID is not assigned to any Session running") # handle if the session id enterd is not in the sessions table 
         else:
-            print("<<There is no sessions running>> ")
+            print(Fore.RED + Style.BRIGHT +"There is no sessions running")
             
         
 
