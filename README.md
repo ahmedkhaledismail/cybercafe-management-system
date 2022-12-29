@@ -9,7 +9,7 @@
 * [Room for Improvement](#room-for-improvement)
 
 ## Requirements and Specifications
-here are the project requirements and specifications as received from the instructor: [Cybercafe Management System Requirements](docs/Cyper%20cafe%20management%20Sytem%20Requirements.pdf)
+here are the project requirements and specifications as received from the instructor: [Cybercafe Management System Requirements](docs/Cyper%20cafe%20management%20System.pdf)
 
 <!-- and here is the complete system analysis pdf document: [Car Rental Business System Report](Car%20Rental%20Business%20System.pdf). -->
 

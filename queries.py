@@ -1,5 +1,6 @@
 import sys
 import json
+from termcolor import colored
 
 sys.path.insert(
     1,
@@ -16,99 +17,93 @@ def lookup_item(database, item):
                     return entry[item_name]
 
 
-def get_attribute(database, item, key):
-    item_attributes = lookup_item(database, item)
-    if item_attributes != None:
-        return item_attributes[key]
-
-
-def get_item_index(database, item):
-    count = 0
-    item_found = False
-    with open(database, "r") as json_database:
-        dict_database = json.load(json_database)
-        for entry in dict_database:
-            for item_name in entry:
-                if item_name == item:
-                    item_found = True
-                    index = count
-                    break
-                elif item_name != item:
-                    count += 1
-            if item_found:
-                break
-    if item_found:
-        return index
-    return None
-
-
 def update_attribute(database, item, key, value):
+    count = -1
+    index = None
     json_database = open(database, "r")
     updated_dict_database = json.load(json_database)
-    json_database.close()
-    item_index = get_item_index(database, item)
-    if item_index != None:
-        updated_dict_database[item_index][item][key] = value
+    for entry in updated_dict_database:
+        for item_name in entry:
+            count += 1
+            if item_name == item:
+                index = count
+                break
+        if index != None:
+            json_database.close()
+            break
+    if index != None:
+        updated_dict_database[index][item][key] = value
         jsonFile = open(database, "w+")
         jsonFile.write(json.dumps(updated_dict_database, indent=4))
         jsonFile.close()
-    elif item_index == None:
+    elif index == None:
         print(
-            "ERROR update_attribute(): the item '{}' does not exist in the '{}' database".format(
-                item, database
+            colored(
+                "\nERROR update_attribute(): the item '{}' does not exist in the '{}' database".format(
+                    item, database
+                ),
+                "red",
             )
         )
-
-
-def get_item_name(kwargs):
-    for key, value in kwargs.items():
-        if key == "user_name":
-            return value
 
 
 def save_item(database, item_attributes):
-    with open(database, "r") as f:
-        json_database = json.load(f)
-    item_name = get_item_name(item_attributes)
+    json_database = open(database, "r")
+    updated_dict_database = json.load(json_database)
+    item_name = item_attributes.get("user_name")
     response = lookup_item(database, item_name)
-    if response != None:
-        print(
-            "ERROR save_item(): the item {} already exists in the {} database".format(
-                item_name, database
-            )
-        )
-        return
-    if item_name != None:
+    if response == None:
         item_entry = {item_name: item_attributes}
-        json_database.append(item_entry)
+        updated_dict_database.append(item_entry)
         with open(database, "w") as f:
-            json.dump(json_database, f, indent=4)
-
+            json.dump(updated_dict_database, f, indent=4)
         print(
-            "item '{}' has been successful saved into the '{}' database".format(
-                item_name, database
+            colored(
+                "\nitem '{}' has been successful saved into the '{}' database".format(
+                    item_name, database
+                ),
+                "green",
             )
         )
-    elif item_name == None:
+    else:
         print(
-            "ERROR save_item(): the item name does not exist in the given dictionary attributes"
+            colored(
+                "\nERROR save_item(): the item {} already exists in the {} database".format(
+                    item_name, database
+                ),
+                "red",
+            )
         )
 
 
 def delete_item(database, item):
-    index = get_item_index(database, item)
+    count = -1
+    index = None
+    json_database = open(database, "r")
+    updated_dict_database = json.load(json_database)
+    for entry in updated_dict_database:
+        for item_name in entry:
+            count += 1
+            if item_name == item:
+                index = count
+                break
+        if index != None:
+            json_database.close()
+            break
+
+    if index != None:
+        del updated_dict_database[index]
+        with open(database, "w") as f:
+            json.dump(updated_dict_database, f, indent=4)
     if index == None:
         print(
-            "ERROR delete_item(): item '{}' does not exist in the '{}' database".format(
-                item, database
+            colored(
+                "\nERROR delete_item(): item '{}' does not exist in the '{}' database".format(
+                    item, database
+                ),
+                "red",
             )
         )
-    elif index != None:
-        with open(database, "r") as f:
-            json_database = json.load(f)
-        del json_database[index]
-        with open(database, "w") as f:
-            json.dump(json_database, f, indent=4)
 
 
 def suggest_user_name(user_name):
