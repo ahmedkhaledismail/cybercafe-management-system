@@ -1,29 +1,44 @@
 import pandas as pd
 class drinks:
     
-    def __init__(self):
-        self.__drink_name = None
-        self.__drink_Price = None
+    def __init__(self,drink_name = None,drink_Price= None):
+        self.__drink_name = drink_name
+        self.__drink_Price = drink_Price
         self.__Drink_id = None
+        if (self.__drink_name != None and self.__drink_Price != None):
+            try:
+                df1 = pd.read_csv('databases\Drinks_menu_Tbl.CSV', index_col=[0])
 
-    def add_drink(self,drink_name,drink_Price):
-        try:
-            self.__drink_name = drink_name
-            self.__drink_Price = drink_Price
+                df2 = pd.DataFrame({"drink_name":self.__drink_name,
+                                        'drink_price':self.__drink_Price,}
+                                        ,index=[1])
 
-            df1 = pd.read_csv('databases\Drinks_menu_Tbl.CSV', index_col=[0])
+                df = pd.concat([df1,df2],ignore_index=True)
+                df.to_csv('databases\Drinks_menu_Tbl.CSV')
+                print('Drink was Added successfully!')
+            except FileNotFoundError:
+                print('CSV file not found')
+            except:
+                print('something went very wrong')
 
-            df2 = pd.DataFrame({"drink_name":self.__drink_name,
-                                    'drink_price':self.__drink_Price,}
-                                    ,index=[1])
+    # def add_drink(self,drink_name,drink_Price):
+    #     try:
+    #         self.__drink_name = drink_name
+    #         self.__drink_Price = drink_Price
 
-            df = pd.concat([df1,df2],ignore_index=True)
-            df.to_csv('databases\Drinks_menu_Tbl.CSV')
-            print('Drink was Added successfully!')
-        except FileNotFoundError:
-            print('CSV file not found')
-        except:
-            print('something went very wrong') 
+    #         df1 = pd.read_csv('databases\Drinks_menu_Tbl.CSV', index_col=[0])
+
+    #         df2 = pd.DataFrame({"drink_name":self.__drink_name,
+    #                                 'drink_price':self.__drink_Price,}
+    #                                 ,index=[1])
+
+    #         df = pd.concat([df1,df2],ignore_index=True)
+    #         df.to_csv('databases\Drinks_menu_Tbl.CSV')
+    #         print('Drink was Added successfully!')
+    #     except FileNotFoundError:
+    #         print('CSV file not found')
+    #     except:
+    #         print('something went very wrong') 
     
     def Show_All_Drinks(self):
         try:

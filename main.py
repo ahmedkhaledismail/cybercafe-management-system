@@ -275,7 +275,7 @@ def main():
                                                             break
                                                         print("Error : Empty input")
 
-                                                    comp.Add_New_Computer(
+                                                    Comp = computer.computer(
                                                         cpu, ram, gpu, storage
                                                     )
                                                     cpu = None
@@ -461,7 +461,7 @@ def main():
                                                             break
                                                         print("Error : Empty input")
 
-                                                    drink.add_drink(
+                                                    Drink = drinks.drinks(
                                                         drink_name, drink_Price
                                                     )
                                                     drink_name = None

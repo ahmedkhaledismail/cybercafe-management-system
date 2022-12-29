@@ -1,9 +1,11 @@
 from classes import computer,drinks
 import pandas as pd
 comp = computer.computer()
-drink = drinks.drinks()
+#drink = drinks.drinks()
 #drink = drinks.drinks('tt',66)
-print(drink.Calculate_Drinks_Cost(2))
+#print(drink.Calculate_Drinks_Cost(2))
+#drink_1 = drinks.drinks('tt',15)
+
 #comp.Add_New_Computer('I9','128 GB','RTX 4090','2000 TB')
 #comp.Update_Record(13,'I99','166 GB','RTX 44090','22 TB')
 #comp.Delete_Computer_by_index(150)
