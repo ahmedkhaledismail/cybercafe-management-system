@@ -80,7 +80,7 @@ class session:
                 session_id=int(input(Fore.BLUE + Style.BRIGHT +"Please Enter The Session ID : "))
 
                 end = datetime.now().strftime("%H:%M:%S")
-                if  dfs.at[session_id, "End"]=="0" or dfs.at[session_id, "End"]== 0    :
+                if  dfs.at[session_id, "End"] == "0" or dfs.at[session_id, "End"] == 0    :
                         dfs.at[session_id, "End"] = end
                         t2 = datetime.strptime(end, "%H:%M:%S")
 

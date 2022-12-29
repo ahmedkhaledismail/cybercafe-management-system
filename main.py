@@ -400,7 +400,7 @@ def main():
                                                 if session_entry_input == 1:
                                                     user_name = (
                                                         VALIDATORS.get_user_name(
-                                                            "Enter user name"
+                                                            "Enter user name: "
                                                         )
                                                     )
                                                     res = QUERIES.lookup_item(
