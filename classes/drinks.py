@@ -93,15 +93,22 @@ class drinks:
 
     def Buy_a_drink(self,Session_id,Drink_id):
         try:
-            df1 = pd.read_csv('databases\Sold_drinks_Tbl.CSV', index_col=[0])
 
-            df2 = pd.DataFrame({"Drink_id":Drink_id,
-                                    'Session_id':Session_id,}
-                                    ,index=[1])
+            drink_df = pd.read_csv('databases\Drinks_menu_Tbl.CSV', index_col=[0])
 
-            df = pd.concat([df1,df2],ignore_index=True)
-            df.to_csv('databases\Sold_drinks_Tbl.CSV')
-            print('Drink was Added successfully!')
+            if Drink_id not in drink_df.index.values:
+                print('invalid Drink id')
+            else:
+
+                df1 = pd.read_csv('databases\Sold_drinks_Tbl.CSV', index_col=[0])
+
+                df2 = pd.DataFrame({"Drink_id":Drink_id,
+                                        'Session_id':Session_id,}
+                                        ,index=[1])
+
+                df = pd.concat([df1,df2],ignore_index=True)
+                df.to_csv('databases\Sold_drinks_Tbl.CSV')
+                print('Drink was Added successfully!')
         except FileNotFoundError:
             print('CSV file not found')
         except:
