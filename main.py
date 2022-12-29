@@ -388,13 +388,14 @@ def main():
                                         if cafe_management_entry_input == 1:
                                             # bookings
                                             session_entry_input = None
-                                            while session_entry_input != 3:
+                                            while session_entry_input != 4:
                                                 os.system("clear")
                                                 print("1. Start New Session")
                                                 print("2. End Existing Session")
-                                                print("3. Return")
+                                                print("3. Show Booking table")
+                                                print("4. Return")
                                                 session_entry_input = (
-                                                    VALIDATORS.get_numeric("\n> ", 1, 3)
+                                                    VALIDATORS.get_numeric("\n> ", 1, 4)
                                                 )
                                                 if session_entry_input == 1:
                                                     user_name = (
@@ -424,7 +425,11 @@ def main():
                                                     session.end_session()
 
                                                 elif session_entry_input == 3:
-                                                    # 3. return
+
+                                                    print(session.show_all_sessions())
+
+                                                elif session_entry_input == 4:
+                                                    # 4. return
                                                     break
                                         elif cafe_management_entry_input == 2:
                                             # charges
