@@ -1,1 +1,2 @@
-Drink_id,Session_id
+,Session_id,Drink_id
+0,10,1.0
