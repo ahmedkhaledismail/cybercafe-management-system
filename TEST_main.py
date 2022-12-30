@@ -7,7 +7,7 @@ drink_df = pd.read_csv('databases\Drinks_menu_Tbl.CSV', index_col=[0])
 drink = drinks.drinks()
 #drink.Buy_a_drink(10,1)
 #drink = drinks.drinks('tt',66)
-print(drink.Calculate_Drinks_Cost('0'))
+print(drink.Calculate_Drinks_Cost(10))
 #drink_1 = drinks.drinks('tt',15)
 
 #comp.Add_New_Computer('I9','128 GB','RTX 4090','2000 TB')

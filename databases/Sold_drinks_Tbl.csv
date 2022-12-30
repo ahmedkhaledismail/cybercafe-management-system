@@ -1,6 +1,2 @@
-<<<<<<< HEAD
-,Session_id,Drink_id
-0,10,1
-=======
-Session_id,Drink_id
->>>>>>> 050a169af1873625938f145a483b53a6d2c1cf21
+,Drink_id,Session_id
+0,1,10.0
