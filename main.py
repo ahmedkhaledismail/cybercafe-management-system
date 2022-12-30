@@ -545,17 +545,17 @@ def main():
                                                 elif drinks_entry_input == 6:
                                                     # 5. Buy a drink
                                                     while True:
-                                                        Drink_ID = input(
+                                                        Drink_ID = int(input(
                                                             "Drink ID: "
-                                                        )
+                                                        ))
                                                         if Drink_ID != "":
                                                             break
                                                         print("Error : Empty input")
 
                                                     while True:
-                                                        Session_ID = input(
+                                                        Session_ID = int(input(
                                                             "Session ID: "
-                                                        )
+                                                        ))
                                                         if Session_ID != "":
                                                             break
                                                         print("Error : Empty input")
