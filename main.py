@@ -559,7 +559,7 @@ def main():
                                                         if Session_ID != "":
                                                             break
                                                         print("Error : Empty input")
-                                                    drink.Buy_a_drink(Drink_ID,Session_ID)
+                                                    drink.Buy_a_drink(Session_ID,Drink_ID)
                                                     Session_ID = None
                                                     Drink_ID = None
 
