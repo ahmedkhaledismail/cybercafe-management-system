@@ -72,20 +72,17 @@ class admin(user):
         if role == "admin":
             user_object = admin(**user_attributes)
         elif role == "member":
+            credit = int(input("Enter member credit: "))
+            user_attributes["credit"] = credit
             user_object = member(**user_attributes)
-        print(
-            "you have successufly created {} {} as {} user".format(
-                first_name, last_name, role
-            )
-        )
         return user_object
 
     def update_record(self, user_name, key, value):
         user_object = construct_object(user_name)
-        user_object.key = value
+        setattr(user_object, key, value)
 
-    def search_record(self):
-        pass
+    def show_records(self):
+        QUERIES.lookup_all_database("databases/users.json")
 
     def delete_record(self, user_name):
         QUERIES.delete_item("databases/users.json", user_name)

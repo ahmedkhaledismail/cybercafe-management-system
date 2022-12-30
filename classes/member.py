@@ -16,6 +16,12 @@ class member(user):
 
     def update_credit(self, value):
         self.__credit += value
+        if self.__credit <= 0:
+            print(
+                "{} credit is {}, customer should recharge his credit".format(
+                    self._user__user_name, self.__credit
+                )
+            )
         QUERIES.update_attribute(
             "databases/users.json", self._user__user_name, "credit", self.__credit
         )

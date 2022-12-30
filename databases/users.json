@@ -20,9 +20,10 @@
             "phone_number": "0112354545",
             "address": "giza",
             "age": 21,
-            "role": "admin",
+            "role": "member",
             "password": "123",
-            "user_id": "2323"
+            "user_id": "2323",
+            "credit": 0
         }
     },
     {
