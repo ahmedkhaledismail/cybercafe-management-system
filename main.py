@@ -75,7 +75,7 @@ def main():
                                         print("2. Show User")
                                         print("3. Update Record")
                                         print("4. Delete Record")
-                                        print("5. Search Record")
+                                        print("5. Show Records")
                                         print("6. Return")
                                         user_entry_input = VALIDATORS.get_numeric(
                                             "\n> ", 1, 6
@@ -141,10 +141,22 @@ def main():
                                                     break
                                         elif user_entry_input == 4:
                                             # 4. Delete Record
-                                            pass
+                                            os.system("clear")
+                                            user_name_input = VALIDATORS.get_user_name(
+                                                "Enter user name: "
+                                            )
+                                            admin_object.delete_record(user_name_input)
                                         elif user_entry_input == 5:
                                             # 5. Search Record
-                                            pass
+                                            os.system("clear")
+                                            admin_object.show_records()
+                                            while True:
+                                                search_records_option_input = VALIDATORS.get_numeric(
+                                                    "\n\nChoose an option to continue: \n1. return\nYour input is: ",
+                                                    1,
+                                                )
+                                                if search_records_option_input == 1:
+                                                    break
                                 elif master_entry_input == 2:
                                     computer_entry_input = None
                                     while computer_entry_input != 6:

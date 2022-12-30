@@ -14,7 +14,16 @@ def lookup_item(database, item):
         for entry in dict_database:
             for item_name in entry:
                 if item_name == item:
+                    json_database.close()
                     return entry[item_name]
+
+
+def lookup_all_database(database):
+    with open(database, "r") as json_database:
+        dict_database = json.load(json_database)
+        for entry in dict_database:
+            print(entry)
+        json_database.close()
 
 
 def update_attribute(database, item, key, value):
