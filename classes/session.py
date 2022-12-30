@@ -105,6 +105,8 @@ class session:
                         fees = (sec * 2) + drinkscost
                         dfs.at[session_id, "Fees"] = fees
 
+                        user_name = dfs.at[session_id, "User_ID"]
+
                         dfs.to_csv(bookpath, index=False)
                         dfc.to_csv(computerpath, index=False)
                         print(Fore.GREEN + Style.BRIGHT +"Session has been ended")
