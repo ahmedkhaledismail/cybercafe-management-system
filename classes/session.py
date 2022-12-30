@@ -21,6 +21,7 @@ class session:
         self.start = 0
         self.end = 0
         self.fees = 0
+        self.drink=0
 
     def start_session(self):
         self.start = datetime.now().strftime("%H:%M:%S")
@@ -44,7 +45,7 @@ class session:
                     "Computer_ID": self.computer_id,
                     "Start": self.start,
                     "End": self.end,
-                    "Drinks": "",
+                    "Drinks": self.drink,
                     "Fees": self.fees,
                 }
                 dfs = dfs.append(new_row, ignore_index=True)
@@ -117,13 +118,13 @@ class session:
                     print(
                         Fore.RED
                         + Style.BRIGHT
-                        + "1This Session ID is not assigned to any Session running"
+                        + "This Session ID is not assigned to any Session running"
                     )  # handle if the session id in sessions table but already ended
             except:
                 print(
                     Fore.RED
                     + Style.BRIGHT
-                    + "2This Session ID is not assigned to any Session running"
+                    + "This Session ID is not assigned to any Session running"
                 )  # handle if the session id enterd is not in the sessions table
         else:
             print(Fore.RED + Style.BRIGHT + "There is no sessions running")
