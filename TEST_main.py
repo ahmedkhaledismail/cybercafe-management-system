@@ -5,7 +5,7 @@ import pandas as pd
 drink_df = pd.read_csv('databases\Drinks_menu_Tbl.CSV', index_col=[0])
 #print(drink_df.index)
 drink = drinks.drinks()
-drink.Buy_a_drink(1,100)
+drink.Buy_a_drink(1,1)
 #drink = drinks.drinks('tt',66)
 #print(drink.Calculate_Drinks_Cost(2))
 #drink_1 = drinks.drinks('tt',15)
