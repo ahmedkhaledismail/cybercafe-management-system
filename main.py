@@ -444,9 +444,10 @@ def main():
                                                 print("3. Update Record")
                                                 print("4. Delete Record")
                                                 print("5. Search Record")
-                                                print("6. Return")
+                                                print("6. Buy a drink")
+                                                print("7. Return")
                                                 drinks_entry_input = (
-                                                    VALIDATORS.get_numeric("\n> ", 1, 6)
+                                                    VALIDATORS.get_numeric("\n> ", 1, 7)
                                                 )
                                                 if drinks_entry_input == 1:
                                                     # 1. Add New Drink
@@ -540,6 +541,31 @@ def main():
                                                         print("Error : Empty input")
                                                     print(comp.Search_Record(Key_word))
                                                     Key_word = None
+
+                                                elif drinks_entry_input == 6:
+                                                    # 5. Buy a drink
+                                                    while True:
+                                                        Drink_ID = input(
+                                                            "Drink ID: "
+                                                        )
+                                                        if Drink_ID != "":
+                                                            break
+                                                        print("Error : Empty input")
+
+                                                    while True:
+                                                        Session_ID = input(
+                                                            "Session ID: "
+                                                        )
+                                                        if Session_ID != "":
+                                                            break
+                                                        print("Error : Empty input")
+                                                    drink.Buy_a_drink(Drink_ID,Session_ID)
+                                                    Session_ID = None
+                                                    Drink_ID = None
+
+                                                elif drinks_entry_input == 7:
+                                                    break
+
 
                                 elif admin_input == 3:
                                     # logout admin
