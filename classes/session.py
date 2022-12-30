@@ -88,6 +88,8 @@ class session:
 
                     drinkscost = drinks()
                     drinkscost = drinkscost.Calculate_Drinks_Cost(session_id)
+                
+                    print(drinkscost)
                     dfs.at[session_id, "Drinks"] = drinkscost
 
                     start = dfs.at[session_id, "Start"]
@@ -115,13 +117,13 @@ class session:
                     print(
                         Fore.RED
                         + Style.BRIGHT
-                        + "This Session ID is not assigned to any Session running"
+                        + "1This Session ID is not assigned to any Session running"
                     )  # handle if the session id in sessions table but already ended
             except:
                 print(
                     Fore.RED
                     + Style.BRIGHT
-                    + "This Session ID is not assigned to any Session running"
+                    + "2This Session ID is not assigned to any Session running"
                 )  # handle if the session id enterd is not in the sessions table
         else:
             print(Fore.RED + Style.BRIGHT + "There is no sessions running")
