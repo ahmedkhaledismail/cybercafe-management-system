@@ -437,7 +437,7 @@ def main():
                                         elif cafe_management_entry_input == 3:
                                             # drinks management options start here
                                             drinks_entry_input = None
-                                            while drinks_entry_input != 6:
+                                            while drinks_entry_input != 7:
                                                 os.system("clear")
                                                 print("1. Add New Drink")
                                                 print("2. Show Drinks")
