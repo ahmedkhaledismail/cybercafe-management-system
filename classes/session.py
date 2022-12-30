@@ -8,9 +8,9 @@ from datetime import datetime
 
 colorama.init(autoreset=True)
 
-bookpath = r"databases\Book1.csv"
-userpath = r"databases\Users.csv"
-computerpath = r"databases\Computer_Tbl.csv"
+bookpath = "databases/Book1.csv"
+userpath = "databases/Users.csv"
+computerpath = "databases/Computer_Tbl.csv"
 
 
 class session:
@@ -21,7 +21,7 @@ class session:
         self.start = 0
         self.end = 0
         self.fees = 0
-        self.drink=0
+        self.drink = 0
 
     def start_session(self):
         self.start = datetime.now().strftime("%H:%M:%S")
@@ -89,7 +89,7 @@ class session:
 
                     drinkscost = drinks()
                     drinkscost = drinkscost.Calculate_Drinks_Cost(session_id)
-                
+
                     print(drinkscost)
                     dfs.at[session_id, "Drinks"] = drinkscost
 
@@ -132,7 +132,7 @@ class session:
     @staticmethod
     def show_all_sessions():
         try:
-            return pd.read_csv("databases\Book1.CSV", index_col=[0])
+            return pd.read_csv("databases/Book1.CSV", index_col=[0])
         except FileNotFoundError:
             return "CSV file not found"
         except:
