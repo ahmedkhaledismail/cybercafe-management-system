@@ -5,12 +5,12 @@ import classes.admin as ADMIN
 from colorama import Fore, Back, Style
 from classes.drinks import drinks
 from datetime import datetime
+import queries as QUERIES
 
 colorama.init(autoreset=True)
 
-bookpath = "databases/Book1.csv"
-userpath = "databases/Users.csv"
-computerpath = "databases/Computer_Tbl.csv"
+bookpath = "databases/bookings.csv"
+computerpath = "databases/computers.csv"
 
 
 class session:
@@ -54,6 +54,8 @@ class session:
 
         if flagavailabe == 0:
             print(Fore.RED + Style.BRIGHT + "Sorry no available computer")
+        else:
+            print(Fore.GREEN + Style.BRIGHT + "Session started")
         dfc.to_csv(computerpath, index=False)
         dfs.to_csv(bookpath, index=False)
 
@@ -90,7 +92,6 @@ class session:
                     drinkscost = drinks()
                     drinkscost = drinkscost.Calculate_Drinks_Cost(session_id)
 
-                    print(drinkscost)
                     dfs.at[session_id, "Drinks"] = drinkscost
 
                     start = dfs.at[session_id, "Start"]
@@ -107,8 +108,12 @@ class session:
                     dfs.at[session_id, "Fees"] = fees
 
                     user_name = dfs.at[session_id, "User_ID"]
-                    member_obj = ADMIN.construct_object(user_name)
-                    member_obj.update_credit(-fees)
+                    user_attriutes = QUERIES.lookup_item(
+                        "databases/users.json", user_name
+                    )
+                    if user_attriutes["role"] == "member":
+                        member_obj = ADMIN.construct_object(user_name)
+                        member_obj.update_credit(-fees)
 
                     dfs.to_csv(bookpath, index=False)
                     dfc.to_csv(computerpath, index=False)

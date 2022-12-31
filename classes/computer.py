@@ -16,7 +16,7 @@ class computer:
             and self.__storage != None
         ):
             try:
-                df1 = pd.read_csv("databases/Computer_Tbl.CSV", index_col=[0])
+                df1 = pd.read_csv("databases/computers.CSV", index_col=[0])
 
                 df2 = pd.DataFrame(
                     {
@@ -30,7 +30,7 @@ class computer:
                 )
 
                 df = pd.concat([df1, df2], ignore_index=True)
-                df.to_csv("databases/Computer_Tbl.CSV")
+                df.to_csv("databases/computers.CSV")
                 print("Computer was Added successfully!")
             except FileNotFoundError:
                 print("CSV file not found")
@@ -45,7 +45,7 @@ class computer:
     #         self.__storage = storage
     #         self.__available = 0
 
-    #         df1 = pd.read_csv('databases/Computer_Tbl.CSV', index_col=[0])
+    #         df1 = pd.read_csv('databases/computers.CSV', index_col=[0])
 
     #         df2 = pd.DataFrame({"cpu":self.__cpu,
     #                                 'ram':self.__ram,
@@ -55,7 +55,7 @@ class computer:
     #                                 ,index=[1])
 
     #         df = pd.concat([df1,df2],ignore_index=True)
-    #         df.to_csv('databases/Computer_Tbl.CSV')
+    #         df.to_csv('databases/computers.CSV')
     #         print('Computer was Added successfully!')
     #     except FileNotFoundError:
     #         print('CSV file not found')
@@ -64,7 +64,7 @@ class computer:
 
     def Show_All_Computers(self):
         try:
-            return pd.read_csv("databases/Computer_Tbl.CSV", index_col=[0])
+            return pd.read_csv("databases/computers.CSV", index_col=[0])
         except FileNotFoundError:
             return "CSV file not found"
         except:
@@ -72,7 +72,7 @@ class computer:
 
     def Update_Record(self, computer_id, cpu, ram, gpu, storage):
         try:
-            df = pd.read_csv("databases/Computer_Tbl.CSV", index_col=[0])
+            df = pd.read_csv("databases/computers.CSV", index_col=[0])
 
             self.__cpu = cpu
             self.__ram = ram
@@ -88,7 +88,7 @@ class computer:
             df.at[self.__computer_id, "available"] = self.__available
 
             # df.loc[self.__computer_id] = [self.__ram,self.__gpu,self.__storage,self.__cpu]
-            df.to_csv("databases/Computer_Tbl.CSV")
+            df.to_csv("databases/computers.CSV")
             print("Computer was updated successfully!")
 
         except KeyError:
@@ -100,9 +100,9 @@ class computer:
 
     def Delete_Computer_by_index(self, x):
         try:
-            df = pd.read_csv("databases/Computer_Tbl.CSV", index_col=[0])
+            df = pd.read_csv("databases/computers.CSV", index_col=[0])
             df = df.drop(x)
-            df.to_csv("databases/Computer_Tbl.CSV")
+            df.to_csv("databases/computers.CSV")
             print("Computer was deleted successfully!")
         except KeyError:
             print("Invalid computer ID")
@@ -113,7 +113,7 @@ class computer:
 
     def Search_Record(self, Key_word):
         try:
-            df = pd.read_csv("databases/Computer_Tbl.CSV", index_col=[0])
+            df = pd.read_csv("databases/computers.CSV", index_col=[0])
             dfs = df[
                 df.apply(
                     lambda row: row.astype(str).str.contains(Key_word).any(), axis=1

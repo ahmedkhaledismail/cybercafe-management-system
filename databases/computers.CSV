@@ -1,4 +1,4 @@
-,ram,gpu,storage,cpu,available
+Unnamed: 0,ram,gpu,storage,cpu,available
 0,4 GB,RTX 2070,1 TB,I5,0.0
 1,8 GB,RTX 3070,2 TB,I5,0.0
 2,16 GB,RTX 4070,3 TB,I3,0.0
