@@ -72,7 +72,7 @@ class admin(user):
         if role == "admin":
             user_object = admin(**user_attributes)
         elif role == "member":
-            credit = int(input("Enter member credit: "))
+            credit = VALIDATORS.get_credit("Enter member credit: ")
             user_attributes["credit"] = credit
             user_object = member(**user_attributes)
         return user_object
