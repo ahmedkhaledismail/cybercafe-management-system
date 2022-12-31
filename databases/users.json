@@ -8,7 +8,7 @@
             "address": "giza",
             "age": 21,
             "role": "admin",
-            "password": "123",
+            "password": "898hgh",
             "user_id": "2323"
         }
     },
@@ -23,7 +23,7 @@
             "role": "member",
             "password": "123",
             "user_id": "2323",
-            "credit": 0
+            "credit": -463.0
         }
     },
     {
@@ -37,6 +37,19 @@
             "role": "admin",
             "password": "123",
             "user_id": "2323"
+        }
+    },
+    {
+        "ahmed_shalabi": {
+            "first_name": "ahmed",
+            "last_name": "shalabi",
+            "user_name": "ahmed_shalabi",
+            "address": "zayed",
+            "phone_number": "2434343",
+            "password": "23232",
+            "role": "member",
+            "age": 22,
+            "credit": 200
         }
     }
 ]
