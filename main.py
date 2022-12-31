@@ -214,6 +214,13 @@ def main():
 
                                         elif computer_entry_input == 2:
                                             print(comp.Show_All_Computers())
+                                            while True:
+                                                computer_entry_input_option = VALIDATORS.get_numeric(
+                                                    "\n\nChoose an option to continue: \n1. return\nYour input is: ",
+                                                    1,
+                                                )
+                                                if computer_entry_input_option == 1:
+                                                    break
 
                                         elif computer_entry_input == 3:
                                             # 3. Update Record
@@ -283,6 +290,13 @@ def main():
                                                 print("Error : Empty input")
                                             comp.Delete_Computer_by_index(computer_id)
                                             computer_id = None
+                                            while True:
+                                                computer_entry_input_option = VALIDATORS.get_numeric(
+                                                    "\n\nChoose an option to continue: \n1. return\nYour input is: ",
+                                                    1,
+                                                )
+                                                if computer_entry_input_option == 1:
+                                                    break
 
                                         elif computer_entry_input == 5:
                                             # 5. Search Record
@@ -295,6 +309,13 @@ def main():
                                                 print("Error : Empty input")
                                             print(comp.Search_Record(Key_word))
                                             Key_word = None
+                                            while True:
+                                                computer_entry_input_option = VALIDATORS.get_numeric(
+                                                    "\n\nChoose an option to continue: \n1. return\nYour input is: ",
+                                                    1,
+                                                )
+                                                if computer_entry_input_option == 1:
+                                                    break
 
                                 elif master_entry_input == 3:
                                     # return option
@@ -334,6 +355,13 @@ def main():
                                             if res != None:
                                                 session_obj = session(user_name)
                                                 session_obj.start_session()
+                                                while True:
+                                                    session_entry_input_option = VALIDATORS.get_numeric(
+                                                        "\n\nChoose an option to continue: \n1. return\nYour input is: ",
+                                                        1,
+                                                    )
+                                                    if session_entry_input_option == 1:
+                                                        break
                                             else:
                                                 print(
                                                     colored(
@@ -346,9 +374,23 @@ def main():
                                                 )
                                         elif session_entry_input == 2:
                                             session.end_session()
+                                            while True:
+                                                session_entry_input_option = VALIDATORS.get_numeric(
+                                                    "\n\nChoose an option to continue: \n1. return\nYour input is: ",
+                                                    1,
+                                                )
+                                                if session_entry_input_option == 1:
+                                                    break
 
                                         elif session_entry_input == 3:
                                             print(session.show_all_sessions())
+                                            while True:
+                                                session_entry_input_option = VALIDATORS.get_numeric(
+                                                    "\n\nChoose an option to continue: \n1. return\nYour input is: ",
+                                                    1,
+                                                )
+                                                if session_entry_input_option == 1:
+                                                    break
 
                                         elif session_entry_input == 4:
                                             # 4. return
@@ -395,6 +437,13 @@ def main():
                                         elif drinks_entry_input == 2:
                                             # 2. Show Drinks
                                             print(drink.Show_All_Drinks())
+                                            while True:
+                                                drinks_entry_input_option = VALIDATORS.get_numeric(
+                                                    "\n\nChoose an option to continue: \n1. return\nYour input is: ",
+                                                    1,
+                                                )
+                                                if drinks_entry_input_option == 1:
+                                                    break
 
                                         elif drinks_entry_input == 3:
                                             # 3. Update Record
@@ -430,6 +479,13 @@ def main():
                                             drink_name = None
                                             Drink_id = None
                                             drink_Price = None
+                                            while True:
+                                                drinks_entry_input_option = VALIDATORS.get_numeric(
+                                                    "\n\nChoose an option to continue: \n1. return\nYour input is: ",
+                                                    1,
+                                                )
+                                                if drinks_entry_input_option == 1:
+                                                    break
 
                                         elif drinks_entry_input == 4:
                                             # 4. Delete Record
@@ -442,6 +498,13 @@ def main():
                                                 print("Error : Empty input")
                                             drink.Delete_Drink_by_index(Drink_id)
                                             Drink_id = None
+                                            while True:
+                                                drinks_entry_input_option = VALIDATORS.get_numeric(
+                                                    "\n\nChoose an option to continue: \n1. return\nYour input is: ",
+                                                    1,
+                                                )
+                                                if drinks_entry_input_option == 1:
+                                                    break
 
                                         elif drinks_entry_input == 5:
                                             # 5. Search Record
@@ -452,8 +515,15 @@ def main():
                                                 if Key_word != "":
                                                     break
                                                 print("Error : Empty input")
-                                            print(comp.Search_Record(Key_word))
+                                            print(drink.Search_Record(Key_word))
                                             Key_word = None
+                                            while True:
+                                                drinks_entry_input_option = VALIDATORS.get_numeric(
+                                                    "\n\nChoose an option to continue: \n1. return\nYour input is: ",
+                                                    1,
+                                                )
+                                                if drinks_entry_input_option == 1:
+                                                    break
 
                                         elif drinks_entry_input == 6:
                                             # 5. Buy a drink
